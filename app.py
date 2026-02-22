@@ -80,4 +80,3 @@ if prompt := st.chat_input("Napiš svůj dotaz (např. Jak vyplnit LA?)..."):
 
 
 
-
