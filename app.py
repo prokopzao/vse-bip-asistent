@@ -56,7 +56,7 @@ def nacti_znalosti():
 # Inicializace modelu - používáme stabilní 'gemini-1.5-flash'
 try:
     model = genai.GenerativeModel(
-        model_name='gemini-1.5-flash',
+        model_name='gemini-1.5-flash-latest',
         system_instruction=nacti_znalosti()
     )
 except Exception as e:
@@ -86,6 +86,7 @@ if prompt := st.chat_input("Napiš svůj dotaz (např. Jak vyplnit LA?)..."):
         except Exception as e:
             st.error("⚠️ Asistent narazil na komunikační problém s Googlem.")
             st.info(f"Detail chyby: {e}")
+
 
 
 
