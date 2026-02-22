@@ -24,6 +24,7 @@ with col1:
     if st.button("📄 Dopis o přijetí", use_container_width=True):
         st.info("**Acceptance Letter:** Nahraj scan/PDF. Schvaluje se hromadně v pondělí!")
     if st.button("✍️ Learning Agreement", use_container_width=True):
+        st.info("**LA:** Políčko 'Podmínky k uznání' nechte zcela PRÁZDNÉ!")
     if st.button("🚆 Jízdenky / Letenky", use_container_width=True):
         st.info("**Cesta:** Všechny doklady (tam i zpět) v 1 PDF souboru.")
 
@@ -85,6 +86,7 @@ if prompt := st.chat_input("Napiš svůj dotaz (např. Jak vyplnit LA?)..."):
         except Exception as e:
             st.error("⚠️ Asistent narazil na komunikační problém s Googlem.")
             st.info(f"Detail chyby: {e}")
+
 
 
 
