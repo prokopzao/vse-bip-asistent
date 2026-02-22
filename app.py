@@ -4,14 +4,11 @@ import google.generativeai as genai
 # 1. NASTAVENÍ STRÁNKY A LOGA
 st.set_page_config(page_title="VŠE BIP Asistent", page_icon="🎓", layout="centered")
 
-# Logo Fakulty managementu VŠE
-st.image("https://fm.vse.cz/wp-content/uploads/page/44/FM_logo_CZ_RGB.png", width=400)
-
 st.title("🎓 VŠE BIP: Asistent pro InSIS")
 st.markdown("Proklikej si checklist nebo se zeptej AI na detaily k výjezdu.")
 
 st.link_button(
-    label="📖 OTEVŘÍT VIZUÁLNÍ MANUÁL (Canva)", 
+    label="📖 OTEVŘÍT VIZUÁLNÍ MANUÁL", 
     url="https://vsebip.my.canva.site/", 
     use_container_width=True
 )
@@ -86,6 +83,7 @@ if prompt := st.chat_input("Napiš svůj dotaz (např. Jak vyplnit LA?)..."):
         except Exception as e:
             st.error("⚠️ Asistent narazil na komunikační problém s Googlem.")
             st.info(f"Detail chyby: {e}")
+
 
 
 
