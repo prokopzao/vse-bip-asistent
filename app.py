@@ -28,7 +28,7 @@ st.divider()
 st.subheader("🤖 Zeptej se asistenta")
 
 # KLÍČ: Použij ten, co máš na screenshotu
-API_KEY = "AIzaSyATI0KCn_Df-rF5l2JxWIgFHaMOF7iMgb4" 
+API_KEY = "AIzaSyCqVKvpYc08b2ng87Y4XOYeAbrSYUQJUDY" 
 genai.configure(api_key=API_KEY)
 
 def nacti_znalosti():
@@ -41,8 +41,8 @@ def nacti_znalosti():
 # TADY JE TEN START - POUŽÍVÁME 'gemini-1.5-flash'
 try:
     model = genai.GenerativeModel(
-        model_name='gemini-1.5-flash',
-        system_instruction=nacti_znalosti()
+    model_name='gemini-1.5-flash-latest',
+    system_instruction=nacti_znalosti()
     )
 except Exception as e:
     st.error(f"Nepodařilo se nastartovat model: {e}")
@@ -68,6 +68,7 @@ if prompt := st.chat_input("Napiš svůj dotaz..."):
         except Exception as e:
             st.error("⚠️ Google API má problém. Zkus v AI Studiu vygenerovat nový 'Free' API klíč.")
             st.info(f"Detail chyby: {e}")
+
 
 
 
