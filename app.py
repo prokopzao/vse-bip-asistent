@@ -1,4 +1,4 @@
- import streamlit as st
+import streamlit as st
 import google.generativeai as genai
 
 # 1. NASTAVENÍ VZHLEDU STRÁNKY
@@ -56,3 +56,4 @@ if prompt := st.chat_input("Napiš svůj dotaz..."):
         response = model.generate_content(prompt)
         st.markdown(response.text)
         st.session_state.messages.append({"role": "assistant", "content": response.text})
+
