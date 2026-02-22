@@ -25,9 +25,8 @@ st.divider()
 # 3. MOZEK ASISTENTA
 st.subheader("🤖 Zeptej se asistenta")
 
-API_KEY = "AIzaSyCvYQlFNA_EUreujD8QLbCKYnSAvScw3Cw"
+API_KEY = st.secrets["GOOGLE_API_KEY"]
 genai.configure(api_key=API_KEY)
-
 def nacti_znalosti():
     try:
         with open("znalosti.txt", "r", encoding="utf-8") as f:
@@ -75,3 +74,4 @@ if prompt := st.chat_input("Napiš svůj dotaz..."):
             st.error("⚠️ Komunikační problém s Googlem.")
             st.info(f"Detail chyby: {e}")
             st.info(f"Viditelné modely pro tento klíč: {dostupne_modely}")
+
