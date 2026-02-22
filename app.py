@@ -4,7 +4,7 @@ import google.generativeai as genai
 # 1. NASTAVENÍ VZHLEDU STRÁNKY
 st.set_page_config(page_title="VŠE BIP Asistent", page_icon="🎓", layout="centered")
 # LOGO FAKULTY (FPH VŠE)
-st.image("https://fph.vse.cz/wp-content/uploads/sites/4/2021/03/FPH_logo_CZ_RGB.png", width=300)
+st.image(https://www.google.com/url?sa=t&source=web&rct=j&url=https%3A%2F%2Fpr.vse.cz%2Fenglish%2Fdownload%2Flogo%2F&ved=0CBYQjRxqFwoTCJiJpqO57ZIDFQAAAAAdAAAAABAI&opi=89978449, width=300)
 
 # 2. HLAVIČKA A ODKAZ NA MANUÁL
 st.title("🎓 VŠE BIP: Asistent pro InSIS")
@@ -66,5 +66,6 @@ if prompt := st.chat_input("Napiš svůj dotaz..."):
         response = model.generate_content(prompt)
         st.markdown(response.text)
         st.session_state.messages.append({"role": "assistant", "content": response.text})
+
 
 
