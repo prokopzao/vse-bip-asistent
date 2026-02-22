@@ -3,7 +3,7 @@ import google.generativeai as genai
 
 # 1. NASTAVENÍ STRÁNKY A LOGA
 st.set_page_config(page_title="VŠE BIP Asistent", page_icon="🎓", layout="centered")
-st.image("https://fm.vse.cz/wp-content/uploads/page/44/FM_logo_CZ_RGB.png", width=400)
+st.image("https://fph.vse.cz/wp-content/uploads/logo/FBA/horizontal/FBA_logo_horizontal_white.png", width=400)
 
 st.title("🎓 VŠE BIP: Asistent pro InSIS")
 st.markdown("Proklikej si checklist nebo se zeptej AI na detaily k výjezdu.")
@@ -13,7 +13,7 @@ st.write("### ⚡ Rychlé instrukce k checklistu v InSIS:")
 col1, col2 = st.columns(2)
 with col1:
     if st.button("📄 Dopis o přijetí", use_container_width=True): st.info("**Acceptance Letter:** Nahraj scan/PDF. Schvaluje se hromadně v pondělí!")
-    if st.button("✍️ Learning Agreement", use_container_width=True): st.info("**LA:** Políčko 'Podmínky k uznání' nechte zcela PRÁZDNÉ!")
+    if st.button("✍️ Learning Agreement", use_container_width=True): st.info("**LA:** Podívejte se do vizuálního návodu, kde je přesný návod!")
     if st.button("🚆 Jízdenky / Letenky", use_container_width=True): st.info("**Cesta:** Všechny doklady (tam i zpět) v 1 PDF souboru.")
 with col2:
     if st.button("🏦 Bankovní spojení", use_container_width=True): st.info("**Účet:** Přidej účel 'k výplatě stipendia na zahraniční výjezdy'.")
@@ -74,4 +74,5 @@ if prompt := st.chat_input("Napiš svůj dotaz..."):
             st.error("⚠️ Komunikační problém s Googlem.")
             st.info(f"Detail chyby: {e}")
             st.info(f"Viditelné modely pro tento klíč: {dostupne_modely}")
+
 
