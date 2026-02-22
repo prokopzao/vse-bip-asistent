@@ -1,12 +1,29 @@
 import streamlit as st
 import google.generativeai as genai
 
-# 1. NASTAVENÍ STRÁNKY A LOGA
+# 1. NASTAVENÍ STRÁNKY
 st.set_page_config(page_title="VŠE BIP Asistent", page_icon="🎓", layout="centered")
-st.image("https://fph.vse.cz/wp-content/uploads/logo/FBA/horizontal/FBA_logo_horizontal_white.png", width=400)
+
+# LOGO (vycentrované doprostřed, aby "víc sedělo")
+col1, col2, col3 = st.columns([1, 2, 1])
+with col2:
+    try:
+        st.image("logo.png", use_container_width=True)
+    except Exception:
+        pass # Pokud se logo ještě nenačetlo, nevyhodí to chybu
 
 st.title("🎓 VŠE BIP: Asistent pro InSIS")
 st.markdown("Proklikej si checklist nebo se zeptej AI na detaily k výjezdu.")
+
+# VRÁCENÝ ODKAZ NA CANVU
+st.link_button(
+    label="📖 OTEVŘÍT VIZUÁLNÍ MANUÁL", 
+    url="https://vsebip.my.canva.site/", 
+    use_container_width=True
+)
+
+# 2. INTERAKTIVNÍ CHECKLIST
+# (zbytek tvého kódu zůstává tak, jak je...)
 
 # 2. INTERAKTIVNÍ CHECKLIST
 st.write("### ⚡ Rychlé instrukce k checklistu v InSIS:")
@@ -74,5 +91,6 @@ if prompt := st.chat_input("Napiš svůj dotaz..."):
             st.error("⚠️ Komunikační problém s Googlem.")
             st.info(f"Detail chyby: {e}")
             st.info(f"Viditelné modely pro tento klíč: {dostupne_modely}")
+
 
 
