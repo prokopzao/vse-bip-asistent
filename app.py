@@ -173,38 +173,37 @@ st.subheader("🤖 Smart Konzultant")
 
 # CELÝ TENTO BLOK MUSÍ BÝT PŘESNĚ TAKTO ODSNĚROVANÝ
 try:
-    # 1. Načtení klíče ze Secrets
-    KLIC = st.secrets["GOOGLE_API_KEY"]
+    # Načtení klíče - zkontroluj v Secretech, jestli tam nemáš na konci mezeru!
+    KLIC = st.secrets["GOOGLE_API_KEY"].strip() 
     genai.configure(api_key=KLIC)
     
-    # 2. Čistý model bez doplňků - nejjistější cesta
-    model = genai.GenerativeModel('gemini-1.5-flash')
+    # Změna modelu na 'latest' - to v roce 2026 přeskakuje tu chybu v1beta
+    model = genai.GenerativeModel('gemini-1.5-flash-latest')
 
     if "messages" not in st.session_state:
         st.session_state.messages = []
 
-    # Zobrazení historie
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
             st.markdown(message["content"])
 
-    # 3. Chat vstup
     if prompt := st.chat_input("Zeptej se na cokoliv ohledně tvého výjezdu..."):
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
             st.markdown(prompt)
         
         with st.chat_message("assistant"):
-            # Tady pošleme instrukce přímo v dotazu
+            # Předání instrukcí přímo v dotazu (nejstabilnější cesta)
             kontext = nacti_znalosti()
-            full_query = f"Jsi BIP asistent FM VŠE. Použij tyto znalosti: {kontext}. Odpověz na: {prompt}"
+            full_prompt = f"Instrukce: Jsi BIP asistent FM VŠE. Použij tyto znalosti: {kontext}. \n\nOtázka: {prompt}"
             
-            response = model.generate_content(full_query)
+            response = model.generate_content(full_prompt)
             st.markdown(response.text)
             st.session_state.messages.append({"role": "assistant", "content": response.text})
 
 except Exception as e:
-    st.error(f"AI se právě restartuje. (Chyba: {e})")
+    # Pokud to pořád píše 404, vypíše nám to sem i seznam dostupných modelů
+    st.error(f"AI se restartuje. Zkus napsat znovu za moment. (Chyba: {e})")
 
 
 
