@@ -171,6 +171,11 @@ if st.button("✨ MÁM VŠECHNO HOTOVO!"):
 st.write("---")
 st.subheader("🤖 Smart Konzultant")
 
+try:
+    available_models = [m.name for m in genai.list_models()]
+    st.write(f"Tvůj klíč vidí tyto modely: {available_models}")
+except Exception as e:
+    st.write(f"Klíč nefunguje: {e}")
 # CELÝ TENTO BLOK MUSÍ BÝT PŘESNĚ TAKTO ODSNĚROVANÝ
 try:
     KLIC = st.secrets["GOOGLE_API_KEY"].strip()
@@ -205,6 +210,7 @@ try:
 
 except Exception as e:
     st.error(f"AI se právě restartuje. (Chyba: {e})")
+
 
 
 
