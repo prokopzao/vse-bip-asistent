@@ -4,7 +4,7 @@ import google.generativeai as genai
 # 1. KONFIGURACE
 st.set_page_config(page_title="VŠE BIP | Asistent", page_icon="💖", layout="centered")
 
-# NUKLEÁRNÍ CSS - TOTÁLNÍ ELIMINACE BÍLÉ A NEON OVERDRIVE
+# NUKLEÁRNÍ CSS - TOTÁLNÍ TMA A NEONOVÁ ZÁŘ
 st.markdown("""
     <style>
     :root {
@@ -17,8 +17,8 @@ st.markdown("""
         background-color: var(--bg-dark) !important;
     }
 
-    /* !!! FINÁLNÍ ZABIJÁK BÍLÉHO PRUHU !!! */
-    /* Targetujeme všechno od podlahy až po chatovací pole */
+    /* !!! TERMINÁLNÍ FIX BÍLÉHO PRUHU !!! */
+    /* Totální zčernání všech spodních vrstev, které už nám funguje */
     [data-testid="stBottom"], 
     [data-testid="stBottomBlockContainer"],
     .st-emotion-cache-1835tfv, 
@@ -28,11 +28,7 @@ st.markdown("""
         background-color: var(--bg-dark) !important;
         background: var(--bg-dark) !important;
         border: none !important;
-    }
-
-    /* FIX PRO BÍLÉ OKRAJE PO STRANÁCH */
-    header, [data-testid="stHeader"] {
-        background-color: transparent !important;
+        box-shadow: none !important;
     }
 
     /* NEONOVÝ CHAT INPUT - Box s růžovou září */
@@ -133,14 +129,14 @@ st.link_button("📂 OTEVŘÍT KOMPLETNÍ MANUÁL (CANVA)", "https://vsebip.my.c
 
 st.write("---")
 
-# 4. KARTY (Všech 6)
+# 4. KARTY (Všech 6 kroků)
 st.subheader("📋 Administrativní Milestone")
 dokumenty = [
     ("📄 Dopis o přijetí", "Tvůj lístek do světa. Nahraj ho v PDF do InSIS k danému výjezdu."),
     ("✍️ Learning Agreement", "Smlouva o předmětech. Políčko 'Podmínky k uznání' nechte PRÁZDNÉ!"),
     ("🚆 Cestovní doklady", "Všechny jízdenky a letenky (tam i zpět) nahrané v jednom PDF."),
     ("📜 Účastnická smlouva", "Podepiš originál u koordinátorky přímo na fakultě."),
-    ("🏦 Bankovní spojení", "V InSIS přidej účet s účelem 'stipendium na zahr. výjezdy'."),
+    ("🏦 Bankovní spojení", "V InSIS přidej účet s účelem 'stipendium na zahraniční výjezdy'."),
     ("🚨 Emergency Contact", "Povinný formulář pro krizové situace. Link máš v e-mailu od OZS.")
 ]
 
@@ -163,12 +159,12 @@ if st.button("✨ MÁM VŠECHNO HOTOVO!"):
 
 st.write("---")
 
-# 6. AI ASISTENT
+# 6. AI ASISTENT (Opravený model a API klíč)
 st.subheader("🤖 Smart Konzultant")
 
 try:
     API_KEY = st.secrets["GOOGLE_API_KEY"]
-    genai.configure(api_key=API_key) # Použití správného klíče ze secrets
+    genai.configure(api_key=API_KEY) # FIX: Velká písmena musí sedět!
     
     def nacti_znalosti():
         with open("znalosti.txt", "r", encoding="utf-8") as f:
@@ -196,7 +192,9 @@ try:
             st.session_state.messages.append({"role": "assistant", "content": response.text})
             
 except Exception as e:
-    st.error("AI se právě restartuje.")
+    # Pokud se stane chyba, vypíše se sem (pomůže nám to s laděním)
+    st.error(f"AI se právě restartuje. (Chyba: {e})")
+
 
 
 
