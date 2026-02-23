@@ -4,7 +4,7 @@ import google.generativeai as genai
 # 1. KONFIGURACE
 st.set_page_config(page_title="VŠE BIP | Asistent", page_icon="💖", layout="centered")
 
-# NUKLEÁRNÍ CSS - TOTÁLNÍ ELIMINACE BÍLÉ A NEON TEXT FIX
+# NUKLEÁRNÍ CSS - TOTÁLNÍ ELIMINACE BÍLÉ A NEON OVERDRIVE
 st.markdown("""
     <style>
     :root {
@@ -17,16 +17,22 @@ st.markdown("""
         background-color: var(--bg-dark) !important;
     }
 
-    /* !!! TERMINÁLNÍ FIX BÍLÉHO PRUHU !!! */
-    /* Totální zčernání všech spodních vrstev */
+    /* !!! FINÁLNÍ ZABIJÁK BÍLÉHO PRUHU !!! */
+    /* Targetujeme všechno od podlahy až po chatovací pole */
     [data-testid="stBottom"], 
     [data-testid="stBottomBlockContainer"],
     .st-emotion-cache-1835tfv, 
     .st-emotion-cache-1v09fsh,
-    .stChatInputContainer {
+    .st-emotion-cache-1c7n2ri,
+    footer {
         background-color: var(--bg-dark) !important;
         background: var(--bg-dark) !important;
         border: none !important;
+    }
+
+    /* FIX PRO BÍLÉ OKRAJE PO STRANÁCH */
+    header, [data-testid="stHeader"] {
+        background-color: transparent !important;
     }
 
     /* NEONOVÝ CHAT INPUT - Box s růžovou září */
@@ -34,39 +40,37 @@ st.markdown("""
         background-color: #050505 !important;
         border: 2px solid var(--vse-pink) !important;
         border-radius: 20px !important;
-        box-shadow: 0 0 25px rgba(212, 34, 115, 0.7) !important;
+        box-shadow: 0 0 30px rgba(212, 34, 115, 0.6) !important;
         padding: 8px !important;
     }
 
-    /* !!! FIX NEVIDITELNÉHO TEXTU "Zeptej se..." !!! */
-    /* Musíme to vynutit přes webkit, aby to Streamlit nepřebil */
+    /* TEXT V CHATU - Růžový placeholder a bílý psaný text */
     div[data-testid="stChatInput"] textarea {
         color: white !important;
         -webkit-text-fill-color: white !important;
     }
 
-    /* Tento kousek kódu zajistí, že placeholder (ten nápis) bude růžově svítit */
     div[data-testid="stChatInput"] textarea::placeholder {
         color: var(--vse-pink) !important;
         -webkit-text-fill-color: var(--vse-pink) !important;
         opacity: 1 !important;
     }
 
-    /* STYL ZPRÁV V CHATU */
+    /* STYL ZPRÁV */
     [data-testid="stChatMessage"] {
         background-color: rgba(255, 255, 255, 0.05) !important;
-        border: 1px solid rgba(212, 34, 115, 0.2) !important;
-        border-radius: 15px !important;
+        border: 1px solid rgba(212, 34, 115, 0.1) !important;
+        border-radius: 20px !important;
     }
 
-    /* GLASS CARDS - Administrativní Milestone */
+    /* DOKUMENTAČNÍ KARTY */
     .doc-card {
         background: rgba(255, 255, 255, 0.04);
         border: 1px solid rgba(212, 34, 115, 0.2);
         border-radius: 22px;
         padding: 22px;
         margin-bottom: 15px;
-        height: 175px;
+        height: 180px;
         transition: 0.4s ease-in-out;
     }
     .doc-card:hover {
@@ -75,7 +79,7 @@ st.markdown("""
         box-shadow: 0 15px 45px rgba(212, 34, 115, 0.4);
     }
 
-    /* EPIC PINK BUTTONS */
+    /* TLAČÍTKA */
     .stButton>button, .stLinkButton > a {
         width: 100% !important;
         border-radius: 50px !important;
@@ -88,15 +92,13 @@ st.markdown("""
         letter-spacing: 2px;
         transition: 0.3s !important;
         text-decoration: none !important;
-        display: flex !important;
-        justify-content: center !important;
     }
     .stButton>button:hover, .stLinkButton > a:hover {
         background: var(--vse-pink) !important;
         box-shadow: 0 0 40px rgba(212, 34, 115, 0.8) !important;
     }
 
-    /* NADPIS S GRADIENTEM */
+    /* NADPIS */
     .super-title {
         font-size: 3.8rem;
         font-weight: 900;
@@ -110,7 +112,6 @@ st.markdown("""
     }
     @keyframes shine { to { background-position: 200% center; } }
 
-    /* Skrytí standardních prvků */
     #MainMenu, footer, header {visibility: hidden;}
     </style>
     """, unsafe_allow_html=True)
@@ -121,7 +122,7 @@ with col2:
     try:
         st.image("logo.png", width=450)
     except:
-        st.write("⚠️ Nahraj logo.png na GitHub!")
+        st.write("⚠️ Nahraj logo.png")
 
 st.markdown('<h1 class="super-title">BIP ASISTENT</h1>', unsafe_allow_html=True)
 st.markdown("<p style='text-align: center; opacity: 0.8; font-size: 1.2rem; margin-top: -15px;'>Smart Hub pro studenty FM VŠE</p>", unsafe_allow_html=True)
@@ -132,7 +133,7 @@ st.link_button("📂 OTEVŘÍT KOMPLETNÍ MANUÁL (CANVA)", "https://vsebip.my.c
 
 st.write("---")
 
-# 4. ADMINISTRATIVNÍ KARTY (Všech 6)
+# 4. KARTY (Všech 6)
 st.subheader("📋 Administrativní Milestone")
 dokumenty = [
     ("📄 Dopis o přijetí", "Tvůj lístek do světa. Nahraj ho v PDF do InSIS k danému výjezdu."),
@@ -167,7 +168,7 @@ st.subheader("🤖 Smart Konzultant")
 
 try:
     API_KEY = st.secrets["GOOGLE_API_KEY"]
-    genai.configure(api_key=API_KEY)
+    genai.configure(api_key=API_key) # Použití správného klíče ze secrets
     
     def nacti_znalosti():
         with open("znalosti.txt", "r", encoding="utf-8") as f:
@@ -196,8 +197,6 @@ try:
             
 except Exception as e:
     st.error("AI se právě restartuje.")
-
-
 
 
 
