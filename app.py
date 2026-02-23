@@ -4,7 +4,7 @@ import google.generativeai as genai
 # 1. KONFIGURACE
 st.set_page_config(page_title="VŠE BIP | Asistent", page_icon="💖", layout="centered")
 
-# NUKLEÁRNÍ CSS FIX PRO BÍLÝ PRUH A NEON DESIGN
+# NUKLEÁRNÍ CSS FIX - TOTÁLNÍ ELIMINACE BÍLÉ
 st.markdown("""
     <style>
     :root {
@@ -12,41 +12,43 @@ st.markdown("""
         --bg-dark: #0e1117;
     }
 
-    /* Celkové pozadí */
+    /* Celkové pozadí aplikace */
     .stApp {
         background-color: var(--bg-dark) !important;
-        color: white !important;
     }
 
-    /* !!! TOTÁLNÍ FIX BÍLÉHO PRUHU DOLE !!! */
-    /* Targetujeme všechny možné kontejnery, které to mohou způsobovat */
-    div[data-testid="stBottom"], 
-    div[data-testid="stBottomBlockContainer"],
-    footer {
+    /* !!! TERMINÁLNÍ FIX BÍLÉHO PRUHU !!! */
+    /* Targetujeme přímo spodní lištu a její vnitřní kontejnery */
+    [data-testid="stBottom"], 
+    [data-testid="stBottomBlockContainer"],
+    .st-emotion-cache-1835tfv, 
+    .st-emotion-cache-1v09fsh {
         background: transparent !important;
         background-color: transparent !important;
     }
 
-    /* NEONOVÝ CHAT BOX - Epic Pink Glow */
+    /* NEONOVÝ CHAT INPUT - Teď v totální tmě */
     div[data-testid="stChatInput"] {
-        background-color: rgba(20, 22, 28, 0.9) !important;
+        background-color: rgba(20, 22, 28, 0.95) !important;
         border: 2px solid var(--vse-pink) !important;
-        border-radius: 25px !important;
-        box-shadow: 0 0 20px rgba(212, 34, 115, 0.6) !important;
-        padding: 10px !important;
+        border-radius: 20px !important;
+        box-shadow: 0 0 25px rgba(212, 34, 115, 0.7) !important; /* Silnější neon glow */
+        padding: 8px !important;
     }
 
-    /* Fix textu uvnitř chatu */
+    /* Fix textu a placeholderu */
     div[data-testid="stChatInput"] textarea {
         color: white !important;
-        caret-color: var(--vse-pink) !important;
+    }
+    div[data-testid="stChatInput"] textarea::placeholder {
+        color: rgba(255, 255, 255, 0.4) !important;
     }
 
-    /* Přebarvení zpráv asistenta */
+    /* STYL ZPRÁV V CHATU */
     [data-testid="stChatMessage"] {
         background-color: rgba(255, 255, 255, 0.05) !important;
-        border: 1px solid rgba(212, 34, 115, 0.1) !important;
-        border-radius: 20px !important;
+        border: 1px solid rgba(212, 34, 115, 0.2) !important;
+        border-radius: 15px !important;
     }
 
     /* GLASS CARDS - Administrativní Milestone */
@@ -60,18 +62,17 @@ st.markdown("""
         transition: 0.4s ease-in-out;
     }
     .doc-card:hover {
-        transform: translateY(-8px);
+        transform: translateY(-10px);
         border-color: var(--vse-pink);
         box-shadow: 0 15px 45px rgba(212, 34, 115, 0.4);
-        background: rgba(212, 34, 115, 0.08);
     }
 
-    /* EPIC BUTTONS */
+    /* EPIC PINK BUTTONS */
     .stButton>button, .stLinkButton > a {
         width: 100% !important;
         border-radius: 50px !important;
         border: 2px solid var(--vse-pink) !important;
-        background: rgba(212, 34, 115, 0.15) !important;
+        background: rgba(212, 34, 115, 0.1) !important;
         color: white !important;
         font-weight: 800 !important;
         text-transform: uppercase;
@@ -85,10 +86,9 @@ st.markdown("""
     .stButton>button:hover, .stLinkButton > a:hover {
         background: var(--vse-pink) !important;
         box-shadow: 0 0 40px rgba(212, 34, 115, 0.8) !important;
-        color: white !important;
     }
 
-    /* ANIMOVANÝ NADPIS BIP ASISTENT */
+    /* NADPIS S GRADIENTEM */
     .super-title {
         font-size: 3.8rem;
         font-weight: 900;
@@ -102,7 +102,7 @@ st.markdown("""
     }
     @keyframes shine { to { background-position: 200% center; } }
 
-    /* Skrytí standardního Streamlit menu */
+    /* Skrytí standardních prvků */
     #MainMenu, footer, header {visibility: hidden;}
     </style>
     """, unsafe_allow_html=True)
@@ -111,9 +111,9 @@ st.markdown("""
 col1, col2, col3 = st.columns([1, 2, 1])
 with col2:
     try:
-        st.image("logo.png", width=450) # Používá image_4cfbdd.png přejmenovaný na GitHubu
+        st.image("logo.png", width=450)
     except:
-        st.write("⚠️ Nahraj logo.png")
+        st.write("⚠️ Nahraj logo.png na GitHub!")
 
 st.markdown('<h1 class="super-title">BIP ASISTENT</h1>', unsafe_allow_html=True)
 st.markdown("<p style='text-align: center; opacity: 0.8; font-size: 1.2rem; margin-top: -15px;'>Smart Hub pro studenty FM VŠE</p>", unsafe_allow_html=True)
@@ -131,8 +131,8 @@ dokumenty = [
     ("✍️ Learning Agreement", "Smlouva o předmětech. Políčko 'Podmínky k uznání' nechte PRÁZDNÉ!"),
     ("🚆 Cestovní doklady", "Všechny jízdenky a letenky (tam i zpět) nahrané v jednom PDF."),
     ("📜 Účastnická smlouva", "Podepiš originál u koordinátorky přímo na fakultě."),
-    ("🏦 Bankovní spojení", "V InSIS přidej účet s účelem 'stipendium na zahraniční výjezdy'."),
-    ("🚨 Emergency Contact", "Povinný formulář pro krizové situace. Odkaz máš v e-mailu od OZS.")
+    ("🏦 Bankovní spojení", "V InSIS přidej účet s účelem 'stipendium na zahr. výjezdy'."),
+    ("🚨 Emergency Contact", "Povinný formulář pro krizové situace. Link máš v e-mailu od OZS.")
 ]
 
 col1, col2 = st.columns(2)
@@ -154,7 +154,7 @@ if st.button("✨ MÁM VŠECHNO HOTOVO!"):
 
 st.write("---")
 
-# 6. AI ASISTENT (Neon Fixed)
+# 6. AI ASISTENT
 st.subheader("🤖 Smart Konzultant")
 
 try:
@@ -167,7 +167,7 @@ try:
 
     model = genai.GenerativeModel(
         model_name='gemini-1.5-flash',
-        system_instruction=nacti_znalosti() + " Jsi BIP ASISTENT. Pomáhej studentům FM VŠE profesionálně v dark-cyber stylu."
+        system_instruction=nacti_znalosti() + " Jsi BIP ASISTENT. Pomáhej studentům FM VŠE v dark-cyber stylu."
     )
 
     if "messages" not in st.session_state:
@@ -187,7 +187,8 @@ try:
             st.session_state.messages.append({"role": "assistant", "content": response.text})
             
 except Exception as e:
-    st.error("AI se právě nabíjí.")
+    st.error("AI se právě restartuje.")
+
 
 
 
