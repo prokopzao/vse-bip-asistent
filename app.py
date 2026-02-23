@@ -4,7 +4,7 @@ import google.generativeai as genai
 # 1. KONFIGURACE
 st.set_page_config(page_title="VŠE BIP | Asistent", page_icon="💖", layout="centered")
 
-# NUKLEÁRNÍ CSS FIX - TOTÁLNÍ ELIMINACE BÍLÉ
+# NUKLEÁRNÍ CSS FIX - TOTÁLNÍ ELIMINACE BÍLÉ A NEON CHAT
 st.markdown("""
     <style>
     :root {
@@ -17,31 +17,37 @@ st.markdown("""
         background-color: var(--bg-dark) !important;
     }
 
-    /* !!! TERMINÁLNÍ FIX BÍLÉHO PRUHU !!! */
-    /* Targetujeme přímo spodní lištu a její vnitřní kontejnery */
+    /* !!! TERMINÁLNÍ FIX BÍLÉHO PRUHU DOLE !!! */
+    /* Targetujeme přímo spodní lištu a její vnitřní kontejnery s maximální prioritou */
     [data-testid="stBottom"], 
     [data-testid="stBottomBlockContainer"],
     .st-emotion-cache-1835tfv, 
-    .st-emotion-cache-1v09fsh {
-        background: transparent !important;
-        background-color: transparent !important;
+    .st-emotion-cache-1v09fsh,
+    footer {
+        background: var(--bg-dark) !important;
+        background-color: var(--bg-dark) !important;
+        border: none !important;
     }
 
-    /* NEONOVÝ CHAT INPUT - Teď v totální tmě */
+    /* NEONOVÝ CHAT INPUT - Musí být vidět text i placeholder */
     div[data-testid="stChatInput"] {
-        background-color: rgba(20, 22, 28, 0.95) !important;
+        background-color: #1a1c23 !important;
         border: 2px solid var(--vse-pink) !important;
         border-radius: 20px !important;
-        box-shadow: 0 0 25px rgba(212, 34, 115, 0.7) !important; /* Silnější neon glow */
+        box-shadow: 0 0 25px rgba(212, 34, 115, 0.7) !important;
         padding: 8px !important;
     }
 
-    /* Fix textu a placeholderu */
+    /* Fix textu a placeholderu uvnitř chatu */
     div[data-testid="stChatInput"] textarea {
         color: white !important;
+        -webkit-text-fill-color: white !important;
     }
+    
+    /* Zajištění, aby byl placeholder viditelný */
     div[data-testid="stChatInput"] textarea::placeholder {
-        color: rgba(255, 255, 255, 0.4) !important;
+        color: rgba(255, 255, 255, 0.5) !important;
+        -webkit-text-fill-color: rgba(255, 255, 255, 0.5) !important;
     }
 
     /* STYL ZPRÁV V CHATU */
@@ -188,6 +194,7 @@ try:
             
 except Exception as e:
     st.error("AI se právě restartuje.")
+
 
 
 
