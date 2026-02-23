@@ -177,8 +177,8 @@ try:
     KLIC = st.secrets["GOOGLE_API_KEY"]
     genai.configure(api_key=KLIC)
     
-    # Použijeme stabilní model, který ti fungoval
-    model = genai.GenerativeModel('gemini-1.5-flash')
+  
+model = genai.GenerativeModel('models/gemini-1.5-flash')
 
     # 2. HISTORIE CHATU - Aby se zprávy nemazaly
     if "messages" not in st.session_state:
@@ -208,6 +208,7 @@ try:
 # TENTO BLOK MUSÍ BÝT ZAROVNANÝ PŘESNĚ POD "try"
 except Exception as e:
     st.error(f"AI se právě restartuje. (Chyba: {e})")
+
 
 
 
