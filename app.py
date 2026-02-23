@@ -173,40 +173,33 @@ st.subheader("🤖 Smart Konzultant")
 
 # CELÝ TENTO BLOK MUSÍ BÝT PŘESNĚ TAKTO ODSNĚROVANÝ
 try:
-    # 1. NASTAVENÍ AI
     KLIC = st.secrets["GOOGLE_API_KEY"]
     genai.configure(api_key=KLIC)
     
-  
-    # Místo gemini-1.5-flash tam dej toto:
-    model = genai.GenerativeModel('gemini-pro')
+    # 1. Takhle to bylo předtím - úplně jednoduše:
+    model = genai.GenerativeModel('gemini-1.5-flash')
 
-    # 2. HISTORIE CHATU - Aby se zprávy nemazaly
     if "messages" not in st.session_state:
         st.session_state.messages = []
 
-    # Zobrazení starých zpráv
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
             st.markdown(message["content"])
 
-    # 3. VSTUPNÍ POLE CHATU - Tady se děje to kouzlo
     if prompt := st.chat_input("Zeptej se na cokoliv ohledně tvého výjezdu..."):
-        # Uložíme a zobrazíme dotaz uživatele
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
             st.markdown(prompt)
-
-        # Vygenerujeme a zobrazíme odpověď asistenta
+        
         with st.chat_message("assistant"):
-            # Předáme asistentovi tvoje znalosti ze souboru
+            # 2. Tady "propasujeme" tvoje znalosti přímo do otázky:
             kontext = nacti_znalosti()
-            response = model.generate_content(f"Instrukce: {kontext}. Otázka: {prompt}")
+            full_prompt = f"Instrukce: {kontext}\n\nOtázka studenta: {prompt}"
             
+            response = model.generate_content(full_prompt)
             st.markdown(response.text)
             st.session_state.messages.append({"role": "assistant", "content": response.text})
 
-# TENTO BLOK MUSÍ BÝT ZAROVNANÝ PŘESNĚ POD "try"
 except Exception as e:
     st.error(f"AI se právě restartuje. (Chyba: {e})")
 
