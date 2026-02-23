@@ -173,15 +173,19 @@ st.write("---")
 # 6. AI ASISTENT
 st.subheader("🤖 Smart Konzultant")
 
+# 1. Začátek bloku (musí být úplně u kraje nebo pod předchozím kódem)
 try:
+    # 2. Všechny tyto řádky MUSÍ být odsazeny (o 4 mezery nebo 1 tabulátor)
     KLIC = st.secrets["GOOGLE_API_KEY"]
     genai.configure(api_key=KLIC)
     
-    # FIX MODELU A ODSAZENÍ (Ujisti se, že pod sebou řádky lícují)
-model = genai.GenerativeModel(
-        model_name='gemini-1.5-flash', # Musí mít např. 8 mezer od kraje
-        system_instruction=nacti_znalosti() + " Jsi BIP ASISTENT. Pomáhej studentům FM VŠE v dark-cyber stylu." # Musí mít taky 8 mezer
-    )
+    model = genai.GenerativeModel('gemini-1.5-flash')
+    
+    # ... zde máš zbytek kódu pro zobrazení zpráv a chat_input ...
+
+# 3. Tento blok MUSÍ být na konci a musí být zarovnaný přesně pod slovem "try"
+except Exception as e:
+    st.error(f"AI se právě restartuje. (Chyba: {e})")
 
     if "messages" not in st.session_state:
         st.session_state.messages = []
@@ -201,6 +205,7 @@ model = genai.GenerativeModel(
             
 except Exception as e:
     st.error(f"AI se právě restartuje. (Chyba: {e})")
+
 
 
 
