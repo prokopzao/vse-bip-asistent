@@ -126,7 +126,7 @@ with col2:
         st.write("⚠️ Logo missing")
 
 st.markdown('<h1 class="super-title">BIP ASISTENT</h1>', unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; opacity: 0.8; font-size: 1.2rem; margin-top: -15px;'>Chytrý pomocník pro studenty FM VŠE. </p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; opacity: 0.8; font-size: 1.2rem; margin-top: -15px;'>Chytrý pomocník pro studenty FM VŠE </p>", unsafe_allow_html=True)
 st.write("")
 
 # 3. MANUÁL
@@ -198,6 +198,7 @@ try:
             
 except Exception as e:
     st.error(f"AI se právě restartuje. (Chyba: {e})")
+
 
 
 
