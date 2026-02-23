@@ -169,48 +169,45 @@ if st.button("✨ MÁM VŠECHNO HOTOVO!"):
     st.success("Geniální práce! Užij si svůj BIP výjezd! 🌍")
 
 st.write("---")
-
-# 6. AI ASISTENT
 st.subheader("🤖 Smart Konzultant")
 
-# 1. Začátek bloku (musí být úplně u kraje nebo pod předchozím kódem)
+# CELÝ TENTO BLOK MUSÍ BÝT PŘESNĚ TAKTO ODSNĚROVANÝ
 try:
-    # 2. Všechny tyto řádky MUSÍ být odsazeny (o 4 mezery nebo 1 tabulátor)
+    # 1. NASTAVENÍ AI
     KLIC = st.secrets["GOOGLE_API_KEY"]
     genai.configure(api_key=KLIC)
     
+    # Použijeme stabilní model, který ti fungoval
     model = genai.GenerativeModel('gemini-1.5-flash')
-    
-    # ... zde máš zbytek kódu pro zobrazení zpráv a chat_input ...
 
-# 3. Tento blok MUSÍ být na konci a musí být zarovnaný přesně pod slovem "try"
-except Exception as e:
-    st.error(f"AI se právě restartuje. (Chyba: {e})")
-
+    # 2. HISTORIE CHATU - Aby se zprávy nemazaly
     if "messages" not in st.session_state:
         st.session_state.messages = []
 
+    # Zobrazení starých zpráv
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
             st.markdown(message["content"])
 
+    # 3. VSTUPNÍ POLE CHATU - Tady se děje to kouzlo
     if prompt := st.chat_input("Zeptej se na cokoliv ohledně tvého výjezdu..."):
+        # Uložíme a zobrazíme dotaz uživatele
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
             st.markdown(prompt)
+
+        # Vygenerujeme a zobrazíme odpověď asistenta
         with st.chat_message("assistant"):
-            response = model.generate_content(prompt)
+            # Předáme asistentovi tvoje znalosti ze souboru
+            kontext = nacti_znalosti()
+            response = model.generate_content(f"Instrukce: {kontext}. Otázka: {prompt}")
+            
             st.markdown(response.text)
             st.session_state.messages.append({"role": "assistant", "content": response.text})
-            
+
+# TENTO BLOK MUSÍ BÝT ZAROVNANÝ PŘESNĚ POD "try"
 except Exception as e:
     st.error(f"AI se právě restartuje. (Chyba: {e})")
-
-
-
-
-
-
 
 
 
