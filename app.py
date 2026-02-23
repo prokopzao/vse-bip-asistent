@@ -1,89 +1,100 @@
 import streamlit as st
 import google.generativeai as genai
 
-# 1. NASTAVENÍ STRÁNKY
-st.set_page_config(page_title="VŠE BIP Asistent", page_icon="🎓", layout="centered")
+# 1. KONFIGURACE A DESIGN
+st.set_page_config(page_title="VŠE BIP Smart Assistant", page_icon="✨", layout="centered")
 
-# 2. CUSTOM CSS (Tady se děje to kouzlo s designem)
+# INSANE CSS UPGRADE
 st.markdown("""
     <style>
-    /* Hlavní barva aplikace (růžová z loga) */
+    /* Základní barvy - VŠE Pink a Dark Theme */
     :root {
-        --vse-pink: #d42273; 
-    }
-    
-    /* Odstranění horní linky a menu pro čistý vzhled */
-    #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
-    header {visibility: hidden;}
-    
-    /* Úprava tlačítek */
-    .stButton>button {
-        border-radius: 12px;
-        border: 1px solid var(--vse-pink);
-        background-color: transparent;
-        color: white;
-        transition: all 0.3s ease;
-        font-weight: 500;
-        padding: 10px 20px;
-    }
-    
-    .stButton>button:hover {
-        background-color: var(--vse-pink);
-        color: white;
-        border-color: var(--vse-pink);
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(212, 34, 115, 0.3);
+        --vse-pink: #d42273;
+        --bg-dark: #0e1117;
+        --glass-bg: rgba(255, 255, 255, 0.05);
     }
 
-    /* Styl pro informační boxy */
-    .stAlert {
-        border-radius: 15px;
-        border: none;
-        background-color: rgba(212, 34, 115, 0.1);
-        border-left: 5px solid var(--vse-pink);
+    /* Vynucení tmavého pozadí pro celou aplikaci */
+    .stApp {
+        background-color: var(--bg-dark);
+        color: white;
     }
-    
-    /* Úprava nadpisů */
-    h1 {
-        font-weight: 800;
-        background: -webkit-linear-gradient(#fff, #d42273);
+
+    /* Úprava tlačítek - Viditelný text a neonový glow */
+    .stButton>button {
+        width: 100% !important;
+        border-radius: 15px !important;
+        border: 2px solid var(--vse-pink) !important;
+        background-color: var(--glass-bg) !important;
+        color: white !important; /* Fix pro viditelnost textu */
+        font-weight: 600 !important;
+        font-size: 16px !important;
+        padding: 15px !important;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .stButton>button:hover {
+        background-color: var(--vse-pink) !important;
+        box-shadow: 0 0 20px rgba(212, 34, 115, 0.6) !important;
+        transform: scale(1.02) !important;
+    }
+
+    /* Styl pro Info boxy - Glassmorphism efekt */
+    .stAlert {
+        background: rgba(212, 34, 115, 0.1) !important;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(212, 34, 115, 0.3) !important;
+        border-radius: 20px !important;
+        color: white !important;
+    }
+
+    /* Skrytí standardních prvků Streamlitu */
+    #MainMenu, footer, header {visibility: hidden;}
+
+    /* Animovaný nadpis s gradientem */
+    .main-title {
+        font-size: 3rem;
+        font-weight: 900;
+        background: linear-gradient(90deg, #ffffff, var(--vse-pink));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+        margin-bottom: 0px;
     }
     </style>
     """, unsafe_allow_html=True)
 
-# 3. LOGO (vycentrované)
+# 3. LOGO (vycentrované s jemným stínem)
 col1, col2, col3 = st.columns([1, 2, 1])
 with col2:
     try:
-        st.image("logo.png", width=400)
+        st.image("logo.png", width=450)
     except:
-        st.write("⚠️ Logo nenalezeno.")
+        st.write("⚠️ Logo missing")
 
-st.title("VŠE BIP: Smart Asistent")
-st.markdown("Vítejte v interaktivním průvodci pro výjezdy BIP. Vše na jednom místě.")
+st.markdown('<h1 class="main-title">BIP Smart Guide</h1>', unsafe_allow_html=True)
+st.markdown("---")
 
-# Hlavní akční tlačítko
+# 4. HLAVNÍ AKCE
 st.link_button(
-    "📖 OTEVŘÍT VIZUÁLNÍ MANUÁL (CANVA)", 
+    "📂 OTEVŘÍT KOMPLETNÍ MANUÁL (CANVA)", 
     "https://vsebip.my.canva.site/", 
     width='stretch'
 )
 
-st.write("---")
+st.write("") # Mezera
 
-# 4. INTERAKTIVNÍ CHECKLIST
-st.subheader("⚡ Rychlé instrukce k dokumentům")
+# 5. CHECKLIST - Teď s viditelnými popisky
+st.subheader("📋 Administrativní Milestone")
 
 dokumenty = {
-    "📄 Dopis o přijetí": "Potvrzení od zahraniční školy, že tě oficiálně berou na pobyt.",
-    "✍️ Learning Agreement": "Smlouva o tom, co budeš v cizině studovat a jak se ti to uzná na VŠE.",
-    "🚆 Jízdenky / Letenky": "Doklady o dopravě tam i zpět nahrané v jednom PDF souboru.",
-    "🏦 Bankovní spojení": "V InSIS zadej číslo účtu s účelem 'stipendium na zahr. výjezdy'.",
-    "🚨 Emergency Contact": "Kontakt na blízkou osobu, který vyplňuješ do externího formuláře.",
-    "📜 Účastnická smlouva": "Klíčový dokument k výplatě grantu – podepsat a odevzdat originál."
+    "📄 Dopis o přijetí": "Oficiální potvrzení o přijetí zahraniční školou.",
+    "✍️ Learning Agreement": "Smlouva o předmětech (nechte pole 'Podmínky uznání' prázdné!).",
+    "🚆 Cestovní doklady": "Všechny jízdenky/letenky nahrané v jednom PDF souboru.",
+    "🏦 Bankovní účet": "Zadej v InSIS s účelem 'stipendium na výjezdy'.",
+    "🚨 Emergency Contact": "Povinný externí formulář (viz e-mail od OZS).",
+    "📜 Smlouva o grantu": "Podepsat a doručit originál pro výplatu peněz."
 }
 
 col1, col2 = st.columns(2)
@@ -93,14 +104,15 @@ for i in range(len(items)):
     label, info = items[i]
     with (col1 if i % 2 == 0 else col2):
         if st.button(label, width='stretch'):
-            st.info(f"**INFO:** {info}")
+            st.info(info)
 
 st.write("---")
 
-# 5. CHAT ASISTENT
-st.subheader("🤖 Smart Chat")
+# 6. INTELEKTUÁLNÍ ASISTENT (Gemini 1.5)
+st.subheader("🤖 AI Konzultant")
 
 try:
+    # Použití klíče ze Secrets
     API_KEY = st.secrets["GOOGLE_API_KEY"]
     genai.configure(api_key=API_KEY)
     
@@ -116,6 +128,7 @@ try:
     if "messages" not in st.session_state:
         st.session_state.messages = []
 
+    # Chat UI
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
             st.markdown(message["content"])
@@ -128,10 +141,9 @@ try:
             response = model.generate_content(prompt)
             st.markdown(response.text)
             st.session_state.messages.append({"role": "assistant", "content": response.text})
+            
 except Exception as e:
-    st.error(f"⚠️ Asistent je dočasně mimo provoz: {e}")
-
-
+    st.error(f"Systémová chyba: {e}")
 
 
 
