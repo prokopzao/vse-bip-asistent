@@ -175,10 +175,10 @@ try:
         with open("znalosti.txt", "r", encoding="utf-8") as f:
             return f.read()
 
-    model = genai.GenerativeModel(
-        model_name='gemini-1.5-flash-8b',
-        system_instruction=nacti_znalosti() + " Jsi BIP ASISTENT. Pomáhej studentům FM VŠE v dark-cyber stylu."
-    )
+   model = genai.GenerativeModel(
+    'gemini-1.5-flash', 
+    system_instruction=nacti_znalosti() + " Jsi BIP ASISTENT. Pomáhej studentům FM VŠE v dark-cyber stylu."
+)
 
     if "messages" not in st.session_state:
         st.session_state.messages = []
@@ -198,6 +198,7 @@ try:
             
 except Exception as e:
     st.error(f"AI se právě restartuje. (Chyba: {e})")
+
 
 
 
