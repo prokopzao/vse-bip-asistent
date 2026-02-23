@@ -168,17 +168,14 @@ st.write("---")
 st.subheader("🤖 Smart Konzultant")
 
 try:
-    API_KEY = st.secrets["GOOGLE_API_KEY"]
-    genai.configure(api_key=API_KEY)
+    KLIC = st.secrets["GOOGLE_API_KEY"]
+    genai.configure(api_key=KLIC)
     
-    def nacti_znalosti():
-        with open("znalosti.txt", "r", encoding="utf-8") as f:
-            return f.read()
-
-   model = genai.GenerativeModel(
-    'gemini-1.5-flash', 
-    system_instruction=nacti_znalosti() + " Jsi BIP ASISTENT. Pomáhej studentům FM VŠE v dark-cyber stylu."
-)
+    # FIX MODELU A ODSAZENÍ (Ujisti se, že pod sebou řádky lícují)
+    model = genai.GenerativeModel(
+        'gemini-1.5-flash', 
+        system_instruction=nacti_znalosti() + " Jsi BIP ASISTENT. Pomáhej studentům FM VŠE v dark-cyber stylu."
+    )
 
     if "messages" not in st.session_state:
         st.session_state.messages = []
@@ -198,6 +195,7 @@ try:
             
 except Exception as e:
     st.error(f"AI se právě restartuje. (Chyba: {e})")
+
 
 
 
