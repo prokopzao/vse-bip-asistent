@@ -1,5 +1,11 @@
 import streamlit as st
 import google.generativeai as genai
+def nacti_znalosti():
+    try:
+        with open("znalosti.txt", "r", encoding="utf-8") as f:
+            return f.read()
+    except FileNotFoundError:
+        return "Znalosti o BIP FM VŠE nenalezeny. Odpovídej obecně."
 
 # 1. KONFIGURACE
 st.set_page_config(page_title="VŠE BIP | Asistent", page_icon="💖", layout="centered")
@@ -195,6 +201,7 @@ try:
             
 except Exception as e:
     st.error(f"AI se právě restartuje. (Chyba: {e})")
+
 
 
 
