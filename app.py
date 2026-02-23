@@ -171,45 +171,41 @@ if st.button("✨ MÁM VŠECHNO HOTOVO!"):
 st.write("---")
 st.subheader("🤖 Smart Konzultant")
 
-try:
-    available_models = [m.name for m in genai.list_models()]
-    st.write(f"Tvůj klíč vidí tyto modely: {available_models}")
-except Exception as e:
-    st.write(f"Klíč nefunguje: {e}")
-# CELÝ TENTO BLOK MUSÍ BÝT PŘESNĚ TAKTO ODSNĚROVANÝ
+# 2. SAMOTNÝ CHAT A AI
 try:
     KLIC = st.secrets["GOOGLE_API_KEY"].strip()
-    
-    # VYNUCENÍ VERZE: Tato řádka je v roce 2026 klíčová
     genai.configure(api_key=KLIC)
     
-    # Zkusíme použít specifický název pro stabilní kanál
-    # Pokud ani toto nepomůže, zkus 'gemini-1.5-flash-latest'
+    # Použijeme model, který ti prokazatelně funguje (2.5 Flash)
     model = genai.GenerativeModel('gemini-2.5-flash')
 
-    # ... zbytek kódu s historií a chatem ...
+    # Zobrazení historie zpráv
+    for message in st.session_state.messages:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
 
+    # Vstup od uživatele
     if prompt := st.chat_input("Zeptej se na cokoliv ohledně tvého výjezdu..."):
-        # ... tvůj kód pro zobrazení zprávy ...
+        # Uložit a ukázat dotaz studenta
+        st.session_state.messages.append({"role": "user", "content": prompt})
+        with st.chat_message("user"):
+            st.markdown(prompt)
         
+        # Generování odpovědi
         with st.chat_message("assistant"):
             kontext = nacti_znalosti()
-            # Posíláme dotaz přes metodu, která v roce 2026 nelimituje verzi
-            response = model.generate_content(f"{kontext}\n\nUživatel: {prompt}")
+            # Posíláme instrukce, aby byl asistent stručný a cyberpunkový
+            full_prompt = f"Jsi BIP asistent FM VŠE. Odpovídej stručně a v dark-cyber stylu. Znalosti: {kontext}\n\nOtázka: {prompt}"
+            
+            response = model.generate_content(full_prompt)
             st.markdown(response.text)
-        
-        with st.chat_message("assistant"):
-            # 3. Pokud to hází 404, zkusíme si nechat vypsat, co asistent vidí
-            try:
-                kontext = nacti_znalosti()
-                response = model.generate_content(f"{kontext}\n\nUživatel: {prompt}")
-                st.markdown(response.text)
-                st.session_state.messages.append({"role": "assistant", "content": response.text})
-            except Exception as e_inner:
-                st.error(f"Chyba při generování: {e_inner}")
+            
+            # Uložit odpověď asistenta do historie
+            st.session_state.messages.append({"role": "assistant", "content": response.text})
 
 except Exception as e:
     st.error(f"AI se právě restartuje. (Chyba: {e})")
+
 
 
 
