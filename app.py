@@ -4,7 +4,7 @@ import google.generativeai as genai
 # 1. KONFIGURACE
 st.set_page_config(page_title="VŠE BIP | Asistent", page_icon="💖", layout="centered")
 
-# NUKLEÁRNÍ CSS FIX - TOTÁLNÍ ELIMINACE BÍLÉ A NEON CHAT
+# TOTÁLNÍ ELIMINACE BÍLÉ - VOID CSS
 st.markdown("""
     <style>
     :root {
@@ -12,52 +12,53 @@ st.markdown("""
         --bg-dark: #0e1117;
     }
 
-    /* Celkové pozadí aplikace */
+    /* Celkové pozadí */
     .stApp {
         background-color: var(--bg-dark) !important;
     }
 
-    /* !!! TERMINÁLNÍ FIX BÍLÉHO PRUHU DOLE !!! */
-    /* Targetujeme přímo spodní lištu a její vnitřní kontejnery s maximální prioritou */
+    /* !!! NUKLEÁRNÍ FIX BÍLÉHO PRUHU !!! */
+    /* Targetujeme VŠECHNY obalové prvky spodní části */
     [data-testid="stBottom"], 
     [data-testid="stBottomBlockContainer"],
-    .st-emotion-cache-1835tfv, 
+    [data-testid="stChatInput"].st-emotion-cache-1v09fsh,
+    .st-emotion-cache-1835tfv,
     .st-emotion-cache-1v09fsh,
     footer {
-        background: var(--bg-dark) !important;
         background-color: var(--bg-dark) !important;
+        background: var(--bg-dark) !important;
         border: none !important;
+        box-shadow: none !important;
     }
 
-    /* NEONOVÝ CHAT INPUT - Musí být vidět text i placeholder */
+    /* NEONOVÝ CHAT INPUT - Musí být temný se září */
     div[data-testid="stChatInput"] {
         background-color: #1a1c23 !important;
         border: 2px solid var(--vse-pink) !important;
         border-radius: 20px !important;
-        box-shadow: 0 0 25px rgba(212, 34, 115, 0.7) !important;
-        padding: 8px !important;
+        box-shadow: 0 0 30px rgba(212, 34, 115, 0.5) !important;
     }
 
-    /* Fix textu a placeholderu uvnitř chatu */
+    /* FIX TEXTU A PLACEHOLDERU - Aby byly vidět */
     div[data-testid="stChatInput"] textarea {
         color: white !important;
-        -webkit-text-fill-color: white !important;
+        -webkit-text-fill-color: white !important; /* Vynucení pro Safari/Mac */
     }
     
-    /* Zajištění, aby byl placeholder viditelný */
+    /* Viditelnost nápisu "Zeptej se na cokoliv..." */
     div[data-testid="stChatInput"] textarea::placeholder {
-        color: rgba(255, 255, 255, 0.5) !important;
-        -webkit-text-fill-color: rgba(255, 255, 255, 0.5) !important;
+        color: rgba(255, 255, 255, 0.6) !important;
+        -webkit-text-fill-color: rgba(255, 255, 255, 0.6) !important;
     }
 
-    /* STYL ZPRÁV V CHATU */
+    /* STYL ZPRÁV */
     [data-testid="stChatMessage"] {
         background-color: rgba(255, 255, 255, 0.05) !important;
         border: 1px solid rgba(212, 34, 115, 0.2) !important;
         border-radius: 15px !important;
     }
 
-    /* GLASS CARDS - Administrativní Milestone */
+    /* GLASS CARDS DOKUMENTY */
     .doc-card {
         background: rgba(255, 255, 255, 0.04);
         border: 1px solid rgba(212, 34, 115, 0.2);
@@ -68,7 +69,7 @@ st.markdown("""
         transition: 0.4s ease-in-out;
     }
     .doc-card:hover {
-        transform: translateY(-10px);
+        transform: translateY(-8px);
         border-color: var(--vse-pink);
         box-shadow: 0 15px 45px rgba(212, 34, 115, 0.4);
     }
@@ -92,6 +93,7 @@ st.markdown("""
     .stButton>button:hover, .stLinkButton > a:hover {
         background: var(--vse-pink) !important;
         box-shadow: 0 0 40px rgba(212, 34, 115, 0.8) !important;
+        color: white !important;
     }
 
     /* NADPIS S GRADIENTEM */
@@ -194,6 +196,7 @@ try:
             
 except Exception as e:
     st.error("AI se právě restartuje.")
+
 
 
 
