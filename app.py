@@ -35,6 +35,7 @@ st.link_button(
     label="📖 OTEVŘÍT VIZUÁLNÍ MANUÁL", 
     url="https://vsebip.my.canva.site/", 
     width='stretch'
+    )
 
 
 # 2. INTERAKTIVNÍ CHECKLIST
@@ -106,6 +107,7 @@ if prompt := st.chat_input("Napiš svůj dotaz..."):
             st.error("⚠️ Komunikační problém s Googlem.")
             st.info(f"Detail chyby: {e}")
             st.info(f"Viditelné modely pro tento klíč: {dostupne_modely}")
+
 
 
 
