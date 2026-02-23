@@ -4,24 +4,37 @@ import google.generativeai as genai
 # 1. NASTAVENÍ STRÁNKY
 st.set_page_config(page_title="VŠE BIP Asistent", page_icon="🎓", layout="centered")
 
-# 2. PROFI LOGO (s bílým podkladem pro tmavý režim)
-st.markdown(
-    """
-    <div style="background-color: white; padding: 20px; border-radius: 15px; text-align: center; margin-bottom: 25px;">
-        <img src="https://fm.vse.cz/wp-content/uploads/page/44/FM_logo_CZ_RGB.png" width="350">
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+# 2. LOGO S BÍLÝM POZADÍM (Pro fixaci dark mode)
+with st.container():
+    st.markdown(
+        """
+        <style>
+        .logo-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        </style>
+        <div class="logo-container">
+        """, unsafe_allow_html=True
+    )
+    try:
+        # Tady používáme pevnou šířku, což je v pořádku
+        st.image("logo.png", width=500)
+    except:
+        st.write("⚠️ Soubor logo.png nebyl nalezen na GitHubu!")
+    st.markdown("</div>", unsafe_allow_html=True)
 
 st.title("🎓 VŠE BIP: Asistent pro InSIS")
 st.markdown("Proklikej si checklist nebo se zeptej AI na detaily k výjezdu.")
 
+# OPRAVA: use_container_width -> width='stretch'
 st.link_button(
     label="📖 OTEVŘÍT VIZUÁLNÍ MANUÁL", 
     url="https://vsebip.my.canva.site/", 
-    use_container_width=True
-)
+    width='stretch'
 
 
 # 2. INTERAKTIVNÍ CHECKLIST
@@ -93,6 +106,7 @@ if prompt := st.chat_input("Napiš svůj dotaz..."):
             st.error("⚠️ Komunikační problém s Googlem.")
             st.info(f"Detail chyby: {e}")
             st.info(f"Viditelné modely pro tento klíč: {dostupne_modely}")
+
 
 
 
