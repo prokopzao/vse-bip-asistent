@@ -176,9 +176,10 @@ try:
     KLIC = st.secrets["GOOGLE_API_KEY"]
     genai.configure(api_key=KLIC)
     
-    # 1. Takhle to bylo předtím - úplně jednoduše:
-    # Místo 'gemini-1.5-flash' tam dej přesně toto:
-    model = genai.GenerativeModel('models/gemini-1.5-flash')
+    # Použijeme čistý název modelu
+    model = genai.GenerativeModel('gemini-1.5-flash')
+    
+    # ... zbytek tvého kódu ...
 
     if "messages" not in st.session_state:
         st.session_state.messages = []
@@ -203,6 +204,7 @@ try:
 
 except Exception as e:
     st.error(f"AI se právě restartuje. (Chyba: {e})")
+
 
 
 
