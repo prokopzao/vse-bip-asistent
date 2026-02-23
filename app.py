@@ -173,19 +173,18 @@ st.subheader("🤖 Smart Konzultant")
 
 # CELÝ TENTO BLOK MUSÍ BÝT PŘESNĚ TAKTO ODSNĚROVANÝ
 try:
-    # Načtení klíče - zkontroluj v Secretech, jestli tam nemáš na konci mezeru!
-    KLIC = st.secrets["GOOGLE_API_KEY"].strip() 
+    # 1. Načtení klíče a vyčištění od mezer
+    KLIC = st.secrets["GOOGLE_API_KEY"].strip()
     genai.configure(api_key=KLIC)
     
-    # Změna modelu na 'latest' - to v roce 2026 přeskakuje tu chybu v1beta
-    model = genai.GenerativeModel('gemini-1.5-flash-latest')
+    # 2. Zkusíme tento model - v únoru 2026 je nejstabilnější pro studenty
+    # Pokud gemini-1.5-flash nejde, přepiš to na: gemini-1.5-flash-8b-latest
+    model = genai.GenerativeModel('gemini-1.5-flash')
 
     if "messages" not in st.session_state:
         st.session_state.messages = []
 
-    for message in st.session_state.messages:
-        with st.chat_message(message["role"]):
-            st.markdown(message["content"])
+    # ... zbytek tvého kódu pro zobrazení zpráv ...
 
     if prompt := st.chat_input("Zeptej se na cokoliv ohledně tvého výjezdu..."):
         st.session_state.messages.append({"role": "user", "content": prompt})
@@ -193,17 +192,17 @@ try:
             st.markdown(prompt)
         
         with st.chat_message("assistant"):
-            # Předání instrukcí přímo v dotazu (nejstabilnější cesta)
-            kontext = nacti_znalosti()
-            full_prompt = f"Instrukce: Jsi BIP asistent FM VŠE. Použij tyto znalosti: {kontext}. \n\nOtázka: {prompt}"
-            
-            response = model.generate_content(full_prompt)
-            st.markdown(response.text)
-            st.session_state.messages.append({"role": "assistant", "content": response.text})
+            # 3. Pokud to hází 404, zkusíme si nechat vypsat, co asistent vidí
+            try:
+                kontext = nacti_znalosti()
+                response = model.generate_content(f"{kontext}\n\nUživatel: {prompt}")
+                st.markdown(response.text)
+                st.session_state.messages.append({"role": "assistant", "content": response.text})
+            except Exception as e_inner:
+                st.error(f"Chyba při generování: {e_inner}")
 
 except Exception as e:
-    # Pokud to pořád píše 404, vypíše nám to sem i seznam dostupných modelů
-    st.error(f"AI se restartuje. Zkus napsat znovu za moment. (Chyba: {e})")
+    st.error(f"AI se právě restartuje. (Chyba: {e})")
 
 
 
