@@ -4,7 +4,7 @@ import google.generativeai as genai
 # 1. KONFIGURACE
 st.set_page_config(page_title="VŠE BIP | Asistent", page_icon="💖", layout="centered")
 
-# NUKLEÁRNÍ CSS - TOTÁLNÍ TMA A NEONOVÁ ZÁŘ
+# NUKLEÁRNÍ CSS - TOTÁLNÍ ELIMINACE BÍLÉ A NEON CHAT
 st.markdown("""
     <style>
     :root {
@@ -12,18 +12,19 @@ st.markdown("""
         --bg-dark: #0e1117;
     }
 
-    /* Celkové pozadí aplikace */
-    .stApp {
+    /* Celkové pozadí aplikace - VYNUCENO */
+    .stApp, [data-testid="stAppViewContainer"] {
         background-color: var(--bg-dark) !important;
     }
 
-    /* !!! TERMINÁLNÍ FIX BÍLÉHO PRUHU !!! */
-    /* Totální zčernání všech spodních vrstev, které už nám funguje */
+    /* !!! TERMINÁLNÍ FIX BÍLÉHO PRUHU DOLE !!! */
+    /* Targetujeme přímo vnitřní vrstvy Streamlitu, které tu bílou drží */
     [data-testid="stBottom"], 
     [data-testid="stBottomBlockContainer"],
     .st-emotion-cache-1835tfv, 
     .st-emotion-cache-1v09fsh,
     .st-emotion-cache-1c7n2ri,
+    .stChatInputContainer,
     footer {
         background-color: var(--bg-dark) !important;
         background: var(--bg-dark) !important;
@@ -75,7 +76,7 @@ st.markdown("""
         box-shadow: 0 15px 45px rgba(212, 34, 115, 0.4);
     }
 
-    /* TLAČÍTKA */
+    /* EPIC BUTTONS */
     .stButton>button, .stLinkButton > a {
         width: 100% !important;
         border-radius: 50px !important;
@@ -88,13 +89,16 @@ st.markdown("""
         letter-spacing: 2px;
         transition: 0.3s !important;
         text-decoration: none !important;
+        display: flex !important;
+        justify-content: center !important;
     }
     .stButton>button:hover, .stLinkButton > a:hover {
         background: var(--vse-pink) !important;
         box-shadow: 0 0 40px rgba(212, 34, 115, 0.8) !important;
+        color: white !important;
     }
 
-    /* NADPIS */
+    /* NADPIS S GRADIENTEM */
     .super-title {
         font-size: 3.8rem;
         font-weight: 900;
@@ -108,7 +112,8 @@ st.markdown("""
     }
     @keyframes shine { to { background-position: 200% center; } }
 
-    #MainMenu, footer, header {visibility: hidden;}
+    /* Skrytí standardních prvků */
+    #MainMenu, header {visibility: hidden;}
     </style>
     """, unsafe_allow_html=True)
 
@@ -118,7 +123,7 @@ with col2:
     try:
         st.image("logo.png", width=450)
     except:
-        st.write("⚠️ Nahraj logo.png")
+        st.write("⚠️ Logo missing")
 
 st.markdown('<h1 class="super-title">BIP ASISTENT</h1>', unsafe_allow_html=True)
 st.markdown("<p style='text-align: center; opacity: 0.8; font-size: 1.2rem; margin-top: -15px;'>Smart Hub pro studenty FM VŠE</p>", unsafe_allow_html=True)
@@ -129,7 +134,7 @@ st.link_button("📂 OTEVŘÍT KOMPLETNÍ MANUÁL (CANVA)", "https://vsebip.my.c
 
 st.write("---")
 
-# 4. KARTY (Všech 6 kroků)
+# 4. ADMINISTRATIVNÍ KARTY (Všech 6)
 st.subheader("📋 Administrativní Milestone")
 dokumenty = [
     ("📄 Dopis o přijetí", "Tvůj lístek do světa. Nahraj ho v PDF do InSIS k danému výjezdu."),
@@ -159,12 +164,12 @@ if st.button("✨ MÁM VŠECHNO HOTOVO!"):
 
 st.write("---")
 
-# 6. AI ASISTENT (Opravený model a API klíč)
+# 6. AI ASISTENT
 st.subheader("🤖 Smart Konzultant")
 
 try:
     API_KEY = st.secrets["GOOGLE_API_KEY"]
-    genai.configure(api_key=API_KEY) # FIX: Velká písmena musí sedět!
+    genai.configure(api_key=API_KEY)
     
     def nacti_znalosti():
         with open("znalosti.txt", "r", encoding="utf-8") as f:
@@ -192,8 +197,8 @@ try:
             st.session_state.messages.append({"role": "assistant", "content": response.text})
             
 except Exception as e:
-    # Pokud se stane chyba, vypíše se sem (pomůže nám to s laděním)
     st.error(f"AI se právě restartuje. (Chyba: {e})")
+
 
 
 
