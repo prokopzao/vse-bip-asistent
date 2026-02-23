@@ -1,5 +1,6 @@
 import streamlit as st
 import google.generativeai as genai
+
 def nacti_znalosti():
     try:
         with open("znalosti.txt", "r", encoding="utf-8") as f:
@@ -10,6 +11,10 @@ def nacti_znalosti():
 # 1. KONFIGURACE
 st.set_page_config(page_title="VŠE BIP | Asistent", page_icon="💖", layout="centered")
 
+# INICIALIZACE HISTORIE (Tohle tam chybělo a způsobovalo chybu!)
+if "messages" not in st.session_state:
+    st.session_state.messages = []
+
 # NUKLEÁRNÍ CSS - TOTÁLNÍ ELIMINACE BÍLÉ A NEON CHAT
 st.markdown("""
     <style>
@@ -18,13 +23,10 @@ st.markdown("""
         --bg-dark: #0e1117;
     }
 
-    /* Celkové pozadí aplikace - VYNUCENO */
     .stApp, [data-testid="stAppViewContainer"] {
         background-color: var(--bg-dark) !important;
     }
 
-    /* !!! TERMINÁLNÍ FIX BÍLÉHO PRUHU DOLE !!! */
-    /* Targetujeme přímo vnitřní vrstvy Streamlitu, které tu bílou drží */
     [data-testid="stBottom"], 
     [data-testid="stBottomBlockContainer"],
     .st-emotion-cache-1835tfv, 
@@ -38,7 +40,6 @@ st.markdown("""
         box-shadow: none !important;
     }
 
-    /* NEONOVÝ CHAT INPUT - Box s růžovou září */
     div[data-testid="stChatInput"] {
         background-color: #050505 !important;
         border: 2px solid var(--vse-pink) !important;
@@ -47,7 +48,6 @@ st.markdown("""
         padding: 8px !important;
     }
 
-    /* TEXT V CHATU - Růžový placeholder a bílý psaný text */
     div[data-testid="stChatInput"] textarea {
         color: white !important;
         -webkit-text-fill-color: white !important;
@@ -59,21 +59,19 @@ st.markdown("""
         opacity: 1 !important;
     }
 
-    /* STYL ZPRÁV */
     [data-testid="stChatMessage"] {
         background-color: rgba(255, 255, 255, 0.05) !important;
         border: 1px solid rgba(212, 34, 115, 0.1) !important;
         border-radius: 20px !important;
     }
 
-    /* DOKUMENTAČNÍ KARTY */
     .doc-card {
         background: rgba(255, 255, 255, 0.04);
         border: 1px solid rgba(212, 34, 115, 0.2);
         border-radius: 22px;
         padding: 22px;
         margin-bottom: 15px;
-        height: 180px;
+        height: 160px;
         transition: 0.4s ease-in-out;
     }
     .doc-card:hover {
@@ -82,7 +80,6 @@ st.markdown("""
         box-shadow: 0 15px 45px rgba(212, 34, 115, 0.4);
     }
 
-    /* EPIC BUTTONS */
     .stButton>button, .stLinkButton > a {
         width: 100% !important;
         border-radius: 50px !important;
@@ -104,7 +101,6 @@ st.markdown("""
         color: white !important;
     }
 
-    /* NADPIS S GRADIENTEM */
     .super-title {
         font-size: 3.8rem;
         font-weight: 900;
@@ -118,7 +114,6 @@ st.markdown("""
     }
     @keyframes shine { to { background-position: 200% center; } }
 
-    /* Skrytí standardních prvků */
     #MainMenu, header {visibility: hidden;}
     </style>
     """, unsafe_allow_html=True)
@@ -140,15 +135,15 @@ st.link_button("📂 OTEVŘÍT KOMPLETNÍ MANUÁL", "https://vsebip.my.canva.sit
 
 st.write("---")
 
-# 4. ADMINISTRATIVNÍ KARTY (Všech 6)
+# 4. ADMINISTRATIVNÍ KARTY (Základní definice)
 st.subheader("📋 Administrativní kroky")
 dokumenty = [
-    ("📄 Dopis o přijetí", "Tvůj lístek do světa. Nahraj ho v PDF do InSIS k danému výjezdu."),
-    ("✍️ Learning Agreement", "Smlouva o předmětech. Políčko 'Podmínky k uznání' nechte PRÁZDNÉ!"),
-    ("🚆 Cestovní doklady", "Všechny jízdenky a letenky (tam i zpět) nahrané v jednom PDF."),
-    ("📜 Účastnická smlouva", "Podepiš originál u koordinátorky přímo na fakultě."),
-    ("🏦 Bankovní spojení", "V InSIS přidej účet s účelem 'stipendium na zahraniční výjezdy'."),
-    ("🚨 Emergency Contact", "Povinný formulář pro krizové situace. Link máš v e-mailu od OZS.")
+    ("📄 Dopis o přijetí", "Oficiální potvrzení od zahraniční univerzity, že tě přijali ke krátkodobému studiu."),
+    ("✍️ Learning Agreement", "Smlouva o předmětech, které budeš studovat v zahraničí a které ti budou uznány."),
+    ("🚆 Cestovní doklady", "Prokázání cesty na místo pobytu a zpět (letenky, jízdenky) nahrané v jednom PDF."),
+    ("📜 Účastnická smlouva", "Hlavní dokument o tvém výjezdu, který podepisuješ s fakultou kvůli stipendiu."),
+    ("🏦 Bankovní spojení", "Zadání tvého bankovního účtu do systému InSIS pro vyplacení finanční podpory."),
+    ("🚨 Emergency Contact", "Kontaktní údaje na osobu blízkou pro případ nouze během tvého pobytu v zahraničí.")
 ]
 
 col1, col2 = st.columns(2)
@@ -171,12 +166,12 @@ if st.button("✨ MÁM VŠECHNO HOTOVO!"):
 st.write("---")
 st.subheader("🤖 Smart Konzultant")
 
-# 2. SAMOTNÝ CHAT A AI
+# 6. SAMOTNÝ CHAT A AI
 try:
     KLIC = st.secrets["GOOGLE_API_KEY"].strip()
     genai.configure(api_key=KLIC)
     
-    # Použijeme model, který ti prokazatelně funguje (2.5 Flash)
+    # Model 2.5 Flash, který ti už prokazatelně fungoval
     model = genai.GenerativeModel('gemini-2.5-flash')
 
     # Zobrazení historie zpráv
@@ -186,21 +181,16 @@ try:
 
     # Vstup od uživatele
     if prompt := st.chat_input("Zeptej se na cokoliv ohledně tvého výjezdu..."):
-        # Uložit a ukázat dotaz studenta
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
             st.markdown(prompt)
         
-        # Generování odpovědi
         with st.chat_message("assistant"):
             kontext = nacti_znalosti()
-            # Posíláme instrukce, aby byl asistent stručný a cyberpunkový
             full_prompt = f"Jsi BIP asistent FM VŠE. Odpovídej stručně a v dark-cyber stylu. Znalosti: {kontext}\n\nOtázka: {prompt}"
             
             response = model.generate_content(full_prompt)
             st.markdown(response.text)
-            
-            # Uložit odpověď asistenta do historie
             st.session_state.messages.append({"role": "assistant", "content": response.text})
 
 except Exception as e:
