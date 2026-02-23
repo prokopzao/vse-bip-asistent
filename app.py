@@ -178,8 +178,10 @@ try:
     genai.configure(api_key=KLIC)
     
     # FIX MODELU A ODSAZENÍ (Ujisti se, že pod sebou řádky lícují)
-model = genai.GenerativeModel('gemini-1.5-flash')
-system_instruction=nacti_znalosti() + " Jsi BIP ASISTENT. Pomáhej studentům FM VŠE v dark-cyber stylu."
+model = genai.GenerativeModel(
+        model_name='gemini-1.5-flash', # Musí mít např. 8 mezer od kraje
+        system_instruction=nacti_znalosti() + " Jsi BIP ASISTENT. Pomáhej studentům FM VŠE v dark-cyber stylu." # Musí mít taky 8 mezer
+    )
     )
 
     if "messages" not in st.session_state:
@@ -200,6 +202,7 @@ system_instruction=nacti_znalosti() + " Jsi BIP ASISTENT. Pomáhej studentům FM
             
 except Exception as e:
     st.error(f"AI se právě restartuje. (Chyba: {e})")
+
 
 
 
