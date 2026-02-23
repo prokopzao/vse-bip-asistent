@@ -5,21 +5,7 @@ import google.generativeai as genai
 st.set_page_config(page_title="VŠE BIP Asistent", page_icon="🎓", layout="centered")
 
 # 2. LOGO S BÍLÝM POZADÍM (Pro fixaci dark mode)
-with st.container():
-    st.markdown(
-        """
-        <style>
-        .logo-container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        </style>
-        <div class="logo-container">
-        """, unsafe_allow_html=True
-    )
+
     try:
         # Tady používáme pevnou šířku, což je v pořádku
         st.image("logo.png", width=500)
@@ -107,6 +93,7 @@ if prompt := st.chat_input("Napiš svůj dotaz..."):
             st.error("⚠️ Komunikační problém s Googlem.")
             st.info(f"Detail chyby: {e}")
             st.info(f"Viditelné modely pro tento klíč: {dostupne_modely}")
+
 
 
 
