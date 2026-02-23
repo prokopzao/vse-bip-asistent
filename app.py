@@ -173,32 +173,33 @@ st.subheader("🤖 Smart Konzultant")
 
 # CELÝ TENTO BLOK MUSÍ BÝT PŘESNĚ TAKTO ODSNĚROVANÝ
 try:
+    # 1. Načtení klíče ze Secrets
     KLIC = st.secrets["GOOGLE_API_KEY"]
     genai.configure(api_key=KLIC)
     
-    # Použijeme čistý název modelu
+    # 2. Čistý model bez doplňků - nejjistější cesta
     model = genai.GenerativeModel('gemini-1.5-flash')
-    
-    # ... zbytek tvého kódu ...
 
     if "messages" not in st.session_state:
         st.session_state.messages = []
 
+    # Zobrazení historie
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
             st.markdown(message["content"])
 
+    # 3. Chat vstup
     if prompt := st.chat_input("Zeptej se na cokoliv ohledně tvého výjezdu..."):
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
             st.markdown(prompt)
         
         with st.chat_message("assistant"):
-            # 2. Tady "propasujeme" tvoje znalosti přímo do otázky:
+            # Tady pošleme instrukce přímo v dotazu
             kontext = nacti_znalosti()
-            full_prompt = f"Instrukce: {kontext}\n\nOtázka studenta: {prompt}"
+            full_query = f"Jsi BIP asistent FM VŠE. Použij tyto znalosti: {kontext}. Odpověz na: {prompt}"
             
-            response = model.generate_content(full_prompt)
+            response = model.generate_content(full_query)
             st.markdown(response.text)
             st.session_state.messages.append({"role": "assistant", "content": response.text})
 
