@@ -4,7 +4,7 @@ import google.generativeai as genai
 # 1. KONFIGURACE
 st.set_page_config(page_title="VŠE BIP | Asistent", page_icon="💖", layout="centered")
 
-# TOTÁLNÍ ELIMINACE BÍLÉ - VOID CSS
+# NUKLEÁRNÍ CSS - TOTÁLNÍ ELIMINACE BÍLÉ A NEON TEXT FIX
 st.markdown("""
     <style>
     :root {
@@ -12,53 +12,54 @@ st.markdown("""
         --bg-dark: #0e1117;
     }
 
-    /* Celkové pozadí */
+    /* Celkové pozadí aplikace */
     .stApp {
         background-color: var(--bg-dark) !important;
     }
 
-    /* !!! NUKLEÁRNÍ FIX BÍLÉHO PRUHU !!! */
-    /* Targetujeme VŠECHNY obalové prvky spodní části */
+    /* !!! TERMINÁLNÍ FIX BÍLÉHO PRUHU !!! */
+    /* Totální zčernání všech spodních vrstev */
     [data-testid="stBottom"], 
     [data-testid="stBottomBlockContainer"],
-    [data-testid="stChatInput"].st-emotion-cache-1v09fsh,
-    .st-emotion-cache-1835tfv,
+    .st-emotion-cache-1835tfv, 
     .st-emotion-cache-1v09fsh,
-    footer {
+    .stChatInputContainer {
         background-color: var(--bg-dark) !important;
         background: var(--bg-dark) !important;
         border: none !important;
-        box-shadow: none !important;
     }
 
-    /* NEONOVÝ CHAT INPUT - Musí být temný se září */
+    /* NEONOVÝ CHAT INPUT - Box s růžovou září */
     div[data-testid="stChatInput"] {
-        background-color: #1a1c23 !important;
+        background-color: #050505 !important;
         border: 2px solid var(--vse-pink) !important;
         border-radius: 20px !important;
-        box-shadow: 0 0 30px rgba(212, 34, 115, 0.5) !important;
+        box-shadow: 0 0 25px rgba(212, 34, 115, 0.7) !important;
+        padding: 8px !important;
     }
 
-    /* FIX TEXTU A PLACEHOLDERU - Aby byly vidět */
+    /* !!! FIX NEVIDITELNÉHO TEXTU "Zeptej se..." !!! */
+    /* Musíme to vynutit přes webkit, aby to Streamlit nepřebil */
     div[data-testid="stChatInput"] textarea {
         color: white !important;
-        -webkit-text-fill-color: white !important; /* Vynucení pro Safari/Mac */
-    }
-    
-    /* Viditelnost nápisu "Zeptej se na cokoliv..." */
-    div[data-testid="stChatInput"] textarea::placeholder {
-        color: rgba(255, 255, 255, 0.6) !important;
-        -webkit-text-fill-color: rgba(255, 255, 255, 0.6) !important;
+        -webkit-text-fill-color: white !important;
     }
 
-    /* STYL ZPRÁV */
+    /* Tento kousek kódu zajistí, že placeholder (ten nápis) bude růžově svítit */
+    div[data-testid="stChatInput"] textarea::placeholder {
+        color: var(--vse-pink) !important;
+        -webkit-text-fill-color: var(--vse-pink) !important;
+        opacity: 1 !important;
+    }
+
+    /* STYL ZPRÁV V CHATU */
     [data-testid="stChatMessage"] {
         background-color: rgba(255, 255, 255, 0.05) !important;
         border: 1px solid rgba(212, 34, 115, 0.2) !important;
         border-radius: 15px !important;
     }
 
-    /* GLASS CARDS DOKUMENTY */
+    /* GLASS CARDS - Administrativní Milestone */
     .doc-card {
         background: rgba(255, 255, 255, 0.04);
         border: 1px solid rgba(212, 34, 115, 0.2);
@@ -93,7 +94,6 @@ st.markdown("""
     .stButton>button:hover, .stLinkButton > a:hover {
         background: var(--vse-pink) !important;
         box-shadow: 0 0 40px rgba(212, 34, 115, 0.8) !important;
-        color: white !important;
     }
 
     /* NADPIS S GRADIENTEM */
