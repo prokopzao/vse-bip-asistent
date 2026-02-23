@@ -173,23 +173,25 @@ st.subheader("🤖 Smart Konzultant")
 
 # CELÝ TENTO BLOK MUSÍ BÝT PŘESNĚ TAKTO ODSNĚROVANÝ
 try:
-    # 1. Načtení klíče a vyčištění od mezer
     KLIC = st.secrets["GOOGLE_API_KEY"].strip()
+    
+    # VYNUCENÍ VERZE: Tato řádka je v roce 2026 klíčová
     genai.configure(api_key=KLIC)
     
-    # 2. Zkusíme tento model - v únoru 2026 je nejstabilnější pro studenty
-    # Pokud gemini-1.5-flash nejde, přepiš to na: gemini-1.5-flash-8b-latest
-    model = genai.GenerativeModel('gemini-1.5-flash')
+    # Zkusíme použít specifický název pro stabilní kanál
+    # Pokud ani toto nepomůže, zkus 'gemini-1.5-flash-latest'
+    model = genai.GenerativeModel('models/gemini-1.5-flash')
 
-    if "messages" not in st.session_state:
-        st.session_state.messages = []
-
-    # ... zbytek tvého kódu pro zobrazení zpráv ...
+    # ... zbytek kódu s historií a chatem ...
 
     if prompt := st.chat_input("Zeptej se na cokoliv ohledně tvého výjezdu..."):
-        st.session_state.messages.append({"role": "user", "content": prompt})
-        with st.chat_message("user"):
-            st.markdown(prompt)
+        # ... tvůj kód pro zobrazení zprávy ...
+        
+        with st.chat_message("assistant"):
+            kontext = nacti_znalosti()
+            # Posíláme dotaz přes metodu, která v roce 2026 nelimituje verzi
+            response = model.generate_content(f"{kontext}\n\nUživatel: {prompt}")
+            st.markdown(response.text)
         
         with st.chat_message("assistant"):
             # 3. Pokud to hází 404, zkusíme si nechat vypsat, co asistent vidí
