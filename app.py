@@ -4,7 +4,7 @@ import google.generativeai as genai
 # 1. KONFIGURACE
 st.set_page_config(page_title="VŠE BIP | Asistent", page_icon="💖", layout="centered")
 
-# NEON OVERDRIVE CSS
+# NUKLEÁRNÍ CSS FIX PRO BÍLÝ PRUH A NEON DESIGN
 st.markdown("""
     <style>
     :root {
@@ -12,46 +12,44 @@ st.markdown("""
         --bg-dark: #0e1117;
     }
 
-    /* Celé pozadí */
+    /* Celkové pozadí */
     .stApp {
-        background-color: var(--bg-dark);
-        color: white;
+        background-color: var(--bg-dark) !important;
+        color: white !important;
     }
 
-    /* TOTÁLNÍ ZABIJÁK BÍLÉHO PRUHU */
-    div[data-testid="stBottom"] {
-        background-color: transparent !important;
+    /* !!! TOTÁLNÍ FIX BÍLÉHO PRUHU DOLE !!! */
+    /* Targetujeme všechny možné kontejnery, které to mohou způsobovat */
+    div[data-testid="stBottom"], 
+    div[data-testid="stBottomBlockContainer"],
+    footer {
         background: transparent !important;
+        background-color: transparent !important;
     }
-    
-    /* NEONOVÝ CHAT BOX */
+
+    /* NEONOVÝ CHAT BOX - Epic Pink Glow */
     div[data-testid="stChatInput"] {
         background-color: rgba(20, 22, 28, 0.9) !important;
         border: 2px solid var(--vse-pink) !important;
         border-radius: 25px !important;
-        padding: 8px !important;
-        box-shadow: 0 0 20px rgba(212, 34, 115, 0.4) !important;
+        box-shadow: 0 0 20px rgba(212, 34, 115, 0.6) !important;
+        padding: 10px !important;
     }
 
-    /* Fix textu v chatu */
+    /* Fix textu uvnitř chatu */
     div[data-testid="stChatInput"] textarea {
         color: white !important;
         caret-color: var(--vse-pink) !important;
     }
 
-    /* Přebarvení placeholderu (Zeptej se...) */
-    div[data-testid="stChatInput"] textarea::placeholder {
-        color: rgba(212, 34, 115, 0.6) !important;
-    }
-
-    /* STYL ZPRÁV */
+    /* Přebarvení zpráv asistenta */
     [data-testid="stChatMessage"] {
         background-color: rgba(255, 255, 255, 0.05) !important;
         border: 1px solid rgba(212, 34, 115, 0.1) !important;
         border-radius: 20px !important;
     }
 
-    /* GLASS CARDS DOKUMENTY */
+    /* GLASS CARDS - Administrativní Milestone */
     .doc-card {
         background: rgba(255, 255, 255, 0.04);
         border: 1px solid rgba(212, 34, 115, 0.2);
@@ -62,13 +60,13 @@ st.markdown("""
         transition: 0.4s ease-in-out;
     }
     .doc-card:hover {
-        transform: translateY(-10px);
+        transform: translateY(-8px);
         border-color: var(--vse-pink);
-        background: rgba(212, 34, 115, 0.06);
-        box-shadow: 0 15px 45px rgba(212, 34, 115, 0.3);
+        box-shadow: 0 15px 45px rgba(212, 34, 115, 0.4);
+        background: rgba(212, 34, 115, 0.08);
     }
 
-    /* TLAČÍTKA */
+    /* EPIC BUTTONS */
     .stButton>button, .stLinkButton > a {
         width: 100% !important;
         border-radius: 50px !important;
@@ -78,15 +76,19 @@ st.markdown("""
         font-weight: 800 !important;
         text-transform: uppercase;
         padding: 18px !important;
-        letter-spacing: 1.5px;
+        letter-spacing: 2px;
         transition: 0.3s !important;
+        text-decoration: none !important;
+        display: flex !important;
+        justify-content: center !important;
     }
     .stButton>button:hover, .stLinkButton > a:hover {
         background: var(--vse-pink) !important;
-        box-shadow: 0 0 40px rgba(212, 34, 115, 0.7) !important;
+        box-shadow: 0 0 40px rgba(212, 34, 115, 0.8) !important;
+        color: white !important;
     }
 
-    /* NADPIS */
+    /* ANIMOVANÝ NADPIS BIP ASISTENT */
     .super-title {
         font-size: 3.8rem;
         font-weight: 900;
@@ -96,9 +98,11 @@ st.markdown("""
         -webkit-text-fill-color: transparent;
         background-size: 200% auto;
         animation: shine 4s linear infinite;
+        margin-bottom: 0px;
     }
     @keyframes shine { to { background-position: 200% center; } }
 
+    /* Skrytí standardního Streamlit menu */
     #MainMenu, footer, header {visibility: hidden;}
     </style>
     """, unsafe_allow_html=True)
@@ -107,12 +111,12 @@ st.markdown("""
 col1, col2, col3 = st.columns([1, 2, 1])
 with col2:
     try:
-        st.image("logo.png", width=450)
+        st.image("logo.png", width=450) # Používá image_4cfbdd.png přejmenovaný na GitHubu
     except:
-        st.write("⚠️ Logo missing")
+        st.write("⚠️ Nahraj logo.png")
 
 st.markdown('<h1 class="super-title">BIP ASISTENT</h1>', unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; opacity: 0.7; font-size: 1.2rem; margin-top: -15px;'>Smart Hub pro studenty FM VŠE</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; opacity: 0.8; font-size: 1.2rem; margin-top: -15px;'>Smart Hub pro studenty FM VŠE</p>", unsafe_allow_html=True)
 st.write("")
 
 # 3. MANUÁL
@@ -123,12 +127,12 @@ st.write("---")
 # 4. ADMINISTRATIVNÍ KARTY (Všech 6)
 st.subheader("📋 Administrativní Milestone")
 dokumenty = [
-    ("📄 Dopis o přijetí", "Nahraj v PDF do InSIS k danému výjezdu."),
-    ("✍️ Learning Agreement", "Smlouva o předmětech. Pole 'Podmínky k uznání' nechte PRÁZDNÉ!"),
-    ("🚆 Cestovní doklady", "Všechny jízdenky a letenky (tam i zpět) v jednom PDF."),
+    ("📄 Dopis o přijetí", "Tvůj lístek do světa. Nahraj ho v PDF do InSIS k danému výjezdu."),
+    ("✍️ Learning Agreement", "Smlouva o předmětech. Políčko 'Podmínky k uznání' nechte PRÁZDNÉ!"),
+    ("🚆 Cestovní doklady", "Všechny jízdenky a letenky (tam i zpět) nahrané v jednom PDF."),
     ("📜 Účastnická smlouva", "Podepiš originál u koordinátorky přímo na fakultě."),
-    ("🏦 Bankovní spojení", "V InSIS přidej účet s účelem 'stipendium na zahr. výjezdy'."),
-    ("🚨 Emergency Contact", "Povinný formulář pro krizové situace. Link máš v e-mailu.")
+    ("🏦 Bankovní spojení", "V InSIS přidej účet s účelem 'stipendium na zahraniční výjezdy'."),
+    ("🚨 Emergency Contact", "Povinný formulář pro krizové situace. Odkaz máš v e-mailu od OZS.")
 ]
 
 col1, col2 = st.columns(2)
@@ -150,7 +154,7 @@ if st.button("✨ MÁM VŠECHNO HOTOVO!"):
 
 st.write("---")
 
-# 6. AI ASISTENT (Neon Fix)
+# 6. AI ASISTENT (Neon Fixed)
 st.subheader("🤖 Smart Konzultant")
 
 try:
@@ -163,7 +167,7 @@ try:
 
     model = genai.GenerativeModel(
         model_name='gemini-1.5-flash',
-        system_instruction=nacti_znalosti() + " Jsi BIP ASISTENT. Pomáhej studentům FM VŠE profesionálně a v dark-cyber stylu."
+        system_instruction=nacti_znalosti() + " Jsi BIP ASISTENT. Pomáhej studentům FM VŠE profesionálně v dark-cyber stylu."
     )
 
     if "messages" not in st.session_state:
@@ -183,10 +187,7 @@ try:
             st.session_state.messages.append({"role": "assistant", "content": response.text})
             
 except Exception as e:
-    st.error("AI se právě restartuje.")
-
-
-
+    st.error("AI se právě nabíjí.")
 
 
 
