@@ -177,7 +177,8 @@ try:
     genai.configure(api_key=KLIC)
     
     # 1. Takhle to bylo předtím - úplně jednoduše:
-    model = genai.GenerativeModel('gemini-1.5-flash')
+    # Místo 'gemini-1.5-flash' tam dej přesně toto:
+    model = genai.GenerativeModel('models/gemini-1.5-flash')
 
     if "messages" not in st.session_state:
         st.session_state.messages = []
@@ -202,6 +203,7 @@ try:
 
 except Exception as e:
     st.error(f"AI se právě restartuje. (Chyba: {e})")
+
 
 
 
