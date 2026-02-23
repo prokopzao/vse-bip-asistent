@@ -126,16 +126,16 @@ with col2:
         st.write("⚠️ Logo missing")
 
 st.markdown('<h1 class="super-title">BIP ASISTENT</h1>', unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; opacity: 0.8; font-size: 1.2rem; margin-top: -15px;'>Smart Hub pro studenty FM VŠE</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; opacity: 0.8; font-size: 1.2rem; margin-top: -15px;'>Snížková 2.0 (funkční verze)</p>", unsafe_allow_html=True)
 st.write("")
 
 # 3. MANUÁL
-st.link_button("📂 OTEVŘÍT KOMPLETNÍ MANUÁL (CANVA)", "https://vsebip.my.canva.site/")
+st.link_button("📂 OTEVŘÍT KOMPLETNÍ MANUÁL", "https://vsebip.my.canva.site/")
 
 st.write("---")
 
 # 4. ADMINISTRATIVNÍ KARTY (Všech 6)
-st.subheader("📋 Administrativní Milestone")
+st.subheader("📋 Administrativní kroky")
 dokumenty = [
     ("📄 Dopis o přijetí", "Tvůj lístek do světa. Nahraj ho v PDF do InSIS k danému výjezdu."),
     ("✍️ Learning Agreement", "Smlouva o předmětech. Políčko 'Podmínky k uznání' nechte PRÁZDNÉ!"),
@@ -198,6 +198,7 @@ try:
             
 except Exception as e:
     st.error(f"AI se právě restartuje. (Chyba: {e})")
+
 
 
 
