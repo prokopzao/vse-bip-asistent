@@ -182,7 +182,6 @@ model = genai.GenerativeModel(
         model_name='gemini-1.5-flash', # Musí mít např. 8 mezer od kraje
         system_instruction=nacti_znalosti() + " Jsi BIP ASISTENT. Pomáhej studentům FM VŠE v dark-cyber stylu." # Musí mít taky 8 mezer
     )
-    )
 
     if "messages" not in st.session_state:
         st.session_state.messages = []
@@ -202,6 +201,7 @@ model = genai.GenerativeModel(
             
 except Exception as e:
     st.error(f"AI se právě restartuje. (Chyba: {e})")
+
 
 
 
