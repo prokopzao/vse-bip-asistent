@@ -178,7 +178,8 @@ try:
     genai.configure(api_key=KLIC)
     
   
-    model = genai.GenerativeModel('models/gemini-1.5-flash')
+    # Místo gemini-1.5-flash tam dej toto:
+    model = genai.GenerativeModel('gemini-pro')
 
     # 2. HISTORIE CHATU - Aby se zprávy nemazaly
     if "messages" not in st.session_state:
@@ -208,6 +209,7 @@ try:
 # TENTO BLOK MUSÍ BÝT ZAROVNANÝ PŘESNĚ POD "try"
 except Exception as e:
     st.error(f"AI se právě restartuje. (Chyba: {e})")
+
 
 
 
