@@ -4,14 +4,14 @@ import google.generativeai as genai
 # 1. NASTAVENÍ STRÁNKY
 st.set_page_config(page_title="VŠE BIP Asistent", page_icon="🎓", layout="centered")
 
-# 2. LOGO S BÍLÝM POZADÍM (Pro fixaci dark mode)
-
+# 2. LOGO (Teď už bez bílého pozadí, přímo pro růžovou verzi)
+col1, col2, col3 = st.columns([1, 3, 1])
+with col2:
     try:
-        # Tady používáme pevnou šířku, což je v pořádku
+        # Používáme logo.png - ujisti se, že se tak jmenuje na GitHubu!
         st.image("logo.png", width=500)
     except:
         st.write("⚠️ Soubor logo.png nebyl nalezen na GitHubu!")
-    st.markdown("</div>", unsafe_allow_html=True)
 
 st.title("🎓 VŠE BIP: Asistent pro InSIS")
 st.markdown("Proklikej si checklist nebo se zeptej AI na detaily k výjezdu.")
@@ -93,6 +93,7 @@ if prompt := st.chat_input("Napiš svůj dotaz..."):
             st.error("⚠️ Komunikační problém s Googlem.")
             st.info(f"Detail chyby: {e}")
             st.info(f"Viditelné modely pro tento klíč: {dostupne_modely}")
+
 
 
 
