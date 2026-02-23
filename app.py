@@ -4,23 +4,25 @@ import google.generativeai as genai
 # 1. NASTAVENÍ STRÁNKY
 st.set_page_config(page_title="VŠE BIP Asistent", page_icon="🎓", layout="centered")
 
-# LOGO (vycentrované doprostřed, aby "víc sedělo")
-col1, col2, col3 = st.columns([1, 2, 1])
-with col2:
-    try:
-        st.image("logo.png", use_container_width=True)
-    except Exception:
-        pass # Pokud se logo ještě nenačetlo, nevyhodí to chybu
+# 2. PROFI LOGO (s bílým podkladem pro tmavý režim)
+st.markdown(
+    """
+    <div style="background-color: white; padding: 20px; border-radius: 15px; text-align: center; margin-bottom: 25px;">
+        <img src="https://fm.vse.cz/wp-content/uploads/page/44/FM_logo_CZ_RGB.png" width="350">
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
 st.title("🎓 VŠE BIP: Asistent pro InSIS")
 st.markdown("Proklikej si checklist nebo se zeptej AI na detaily k výjezdu.")
 
-# VRÁCENÝ ODKAZ NA CANVU
 st.link_button(
     label="📖 OTEVŘÍT VIZUÁLNÍ MANUÁL", 
     url="https://vsebip.my.canva.site/", 
     use_container_width=True
 )
+
 
 # 2. INTERAKTIVNÍ CHECKLIST
 # (zbytek tvého kódu zůstává tak, jak je...)
@@ -29,13 +31,13 @@ st.link_button(
 st.write("### ⚡ Rychlé instrukce k checklistu v InSIS:")
 col1, col2 = st.columns(2)
 with col1:
-    if st.button("📄 Dopis o přijetí", use_container_width=True): st.info("**Acceptance Letter:** Nahraj scan/PDF. Schvaluje se hromadně v pondělí!")
-    if st.button("✍️ Learning Agreement", use_container_width=True): st.info("**LA:** Podívejte se do vizuálního návodu, kde je přesný návod!")
-    if st.button("🚆 Jízdenky / Letenky", use_container_width=True): st.info("**Cesta:** Všechny doklady (tam i zpět) v 1 PDF souboru.")
+    if st.button("📄 Dopis o přijetí", use_container_width=True): st.info("**Acceptance Letter:** Dopis o přijetí (Acceptance Letter): Jedná se o oficiální potvrzení od zahraniční instituce, které dokládá, že jste byli vybráni a přijati k účasti na daném programu. Nahraj scan/PDF.")
+    if st.button("✍️ Learning Agreement", use_container_width=True): st.info("**LA:** Studijní smlouva uzavíraná mezi vámi, VŠE a hostitelskou školou. Specifikuje, jaké předměty budete v zahraničí studovat a za kolik kreditů vám budou po návratu uznány. Podívejte se do vizuálního návodu, kde je přesný návod!")
+    if st.button("🚆 Jízdenky / Letenky", use_container_width=True): st.info("**Cesta:** Dokumentace vaší dopravy na místo konání pobytu a zpět, která slouží jako doklad o realizaci cesty pro účely vyúčtování nebo proplacení nákladů. Všechny doklady (tam i zpět) v 1 PDF souboru.")
 with col2:
-    if st.button("🏦 Bankovní spojení", use_container_width=True): st.info("**Účet:** Přidej účel 'k výplatě stipendia na zahraniční výjezdy'.")
-    if st.button("🚨 Emergency Contact", use_container_width=True): st.info("**Kontakt:** Vyplň externí formulář z e-mailu od OZS.")
-    if st.button("📜 Účastnická smlouva", use_container_width=True): st.info("**Smlouva:** Podepiš, nahraj a ORIGINÁL přines koordinátorce.")
+    if st.button("🏦 Bankovní spojení", use_container_width=True): st.info("**Účet:** Číslo účtu určené specificky pro výplatu stipendia na zahraniční výjezdy. Přidej účel 'k výplatě stipendia na zahraniční výjezdy'.")
+    if st.button("🚨 Emergency Contact", use_container_width=True): st.info("**Kontakt:** Poskytnutí kontaktu na blízkou osobu, která může být informována v případě, že byste se během pobytu v zahraničí dostali do nouzové situace. Vyplň externí formulář z e-mailu od OZS.")
+    if st.button("📜 Účastnická smlouva", use_container_width=True): st.info("**Smlouva:** lavní smlouva mezi vámi a VŠE (zastoupenou OZS),která definuje podmínky vaší mobility, délku pobytu a výši přidělené finanční podpory. Podepiš, nahraj a ORIGINÁL přines koordinátorce.")
 
 st.divider()
 
@@ -91,6 +93,7 @@ if prompt := st.chat_input("Napiš svůj dotaz..."):
             st.error("⚠️ Komunikační problém s Googlem.")
             st.info(f"Detail chyby: {e}")
             st.info(f"Viditelné modely pro tento klíč: {dostupne_modely}")
+
 
 
 
