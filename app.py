@@ -180,7 +180,7 @@ try:
     
     # Zkusíme použít specifický název pro stabilní kanál
     # Pokud ani toto nepomůže, zkus 'gemini-1.5-flash-latest'
-    model = genai.GenerativeModel('gemini-1.5-pro-latest')
+    model = genai.GenerativeModel('gemini-pro')
 
     # ... zbytek kódu s historií a chatem ...
 
@@ -205,6 +205,7 @@ try:
 
 except Exception as e:
     st.error(f"AI se právě restartuje. (Chyba: {e})")
+
 
 
 
