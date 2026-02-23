@@ -13,7 +13,7 @@ with col2:
     except:
         st.write("⚠️ Soubor logo.png nebyl nalezen na GitHubu!")
 
-st.title("🎓 VŠE BIP: Asistent pro InSIS")
+st.title("VŠE BIP: Asistent pro InSIS")
 st.markdown("Proklikej si checklist nebo se zeptej AI na detaily k výjezdu.")
 
 # OPRAVA: use_container_width -> width='stretch'
@@ -93,6 +93,7 @@ if prompt := st.chat_input("Napiš svůj dotaz..."):
             st.error("⚠️ Komunikační problém s Googlem.")
             st.info(f"Detail chyby: {e}")
             st.info(f"Viditelné modely pro tento klíč: {dostupne_modely}")
+
 
 
 
