@@ -178,8 +178,7 @@ try:
     genai.configure(api_key=KLIC)
     
     # FIX MODELU A ODSAZENÍ (Ujisti se, že pod sebou řádky lícují)
-    model = genai.GenerativeModel(
-        'gemini-1.5-flash', 
+    model = genai.GenerativeModel('gemini-1.5-flash')
         system_instruction=nacti_znalosti() + " Jsi BIP ASISTENT. Pomáhej studentům FM VŠE v dark-cyber stylu."
     )
 
@@ -201,6 +200,7 @@ try:
             
 except Exception as e:
     st.error(f"AI se právě restartuje. (Chyba: {e})")
+
 
 
 
