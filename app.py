@@ -37,7 +37,7 @@ with col1:
 with col2:
     if st.button("🏦 Bankovní spojení", use_container_width=True): st.info("**Účet:** Číslo účtu určené specificky pro výplatu stipendia na zahraniční výjezdy. Přidej účel 'k výplatě stipendia na zahraniční výjezdy'.")
     if st.button("🚨 Emergency Contact", use_container_width=True): st.info("**Kontakt:** Poskytnutí kontaktu na blízkou osobu, která může být informována v případě, že byste se během pobytu v zahraničí dostali do nouzové situace. Vyplň externí formulář z e-mailu od OZS.")
-    if st.button("📜 Účastnická smlouva", use_container_width=True): st.info("**Smlouva:** lavní smlouva mezi vámi a VŠE (zastoupenou OZS),která definuje podmínky vaší mobility, délku pobytu a výši přidělené finanční podpory. Podepiš, nahraj a ORIGINÁL přines koordinátorce.")
+    if st.button("📜 Účastnická smlouva", use_container_width=True): st.info("**Smlouva:** Hlavní smlouva mezi vámi a VŠE (zastoupenou OZS),která definuje podmínky vaší mobility, délku pobytu a výši přidělené finanční podpory. Podepiš, nahraj a ORIGINÁL přines koordinátorce.")
 
 st.divider()
 
@@ -93,6 +93,7 @@ if prompt := st.chat_input("Napiš svůj dotaz..."):
             st.error("⚠️ Komunikační problém s Googlem.")
             st.info(f"Detail chyby: {e}")
             st.info(f"Viditelné modely pro tento klíč: {dostupne_modely}")
+
 
 
 
