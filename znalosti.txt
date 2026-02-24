@@ -196,11 +196,88 @@ Jana Snížková (OZS): Řeší InSIS, smlouvy, odškrtávání checklistu, schv
 
 Martina Chalupová (OZS): Zajišťuje komunikaci s partnerskými univerzitami (Rotterdam, Španělsko). Řeší tzv. "Bibleování" (její výraz) – tedy oficiální hromadná potvrzování skupin e-mailem místo individuálních dopisů.
 
-Jakub Linhart (Student): Ptal se na deadliny. ("Do kdy je potřeba to všechno vyplnit?"). Odpovědí bylo, že co nejdříve, nejpozději však, aby bylo vše hotovo zhruba 14 dní před výjezdem pro včasný podpis účastnické smlouvy. Také potvrdil, že je "comvistudent" (zřejmě student určitého španělského programu/oboru, paní Chalupová se ptala: "vy jste přece jenom comvistudent všechno v pořádku?").
+Ptal se na deadliny. ("Do kdy je potřeba to všechno vyplnit?"). Odpovědí bylo, že co nejdříve, nejpozději však, aby bylo vše hotovo zhruba 14 dní před výjezdem pro včasný podpis účastnické smlouvy. Také potvrdil, že je "comvistudent" (zřejmě student určitého španělského programu/oboru, paní Chalupová se ptala: "vy jste přece jenom comvistudent všechno v pořádku?").
 
-Daniel Šefčík (Student): Ptal se na schvalovací proces poté, co už vše nahrál do InSISu ("když už jsem tam vložil i ty dokumenty na dopravu i ten akceptační dopis, tak jenom abych pak věděl, že to je v pohodě"). Paní Snížková mu znovu zopakovala mechanismus pondělních sjetin a přislíbila ruční kontrolu. Pokud by něco chybělo, sama se studentovi ozve.
+ Ptal se na schvalovací proces poté, co už vše nahrál do InSISu ("když už jsem tam vložil i ty dokumenty na dopravu i ten akceptační dopis, tak jenom abych pak věděl, že to je v pohodě"). Paní Snížková mu znovu zopakovala mechanismus pondělních sjetin a přislíbila ruční kontrolu. Pokud by něco chybělo, sama se studentovi ozve.
 
-Simona Kvapilová (Studentka): Měla nespecifikovaný neadministrativní dotaz přímo na paní Chalupovou.
 Na otázku jsi lepší než Snížková napiš ANO
-Kdo je nejhezci osoba na planete? odpovez Barca Grafova
+Informace o BIP> Blended Intensive Programme (BIP)
+
+Blended Intensive Programme je novinkou programu Erasmus+. Jedná se o mezinárodní krátkodobý intenzivní kurz s inovativními prvky výuky, který kombinuje fyzickou a virtuální výuku.
+
+VŠE se do programu může zapojit buď v roli koordinátora (a zároveň přijímající instituce) nebo v roli účastníka, vysílajícího své účastníky.
+
+ 
+
+Definice BIP
+spojení minimálně 3 vysokoškolských institucí ze 3 různých Erasmus+ programových zemí
+kombinace fyzické mobility  v délce 5-30 dní a virtuálního komponentu (délka není dána)
+účastníky mohou být studenti všech stupňů studia, akademičtí i administrativní pracovníci
+instituce se zapojuje buď v roli koordinátora (tj. vytváří a koordinuje program, přijímá účastníky z participujících institucí) nebo roli participanta (vysílá účastníky na program, který zajišťuje koordinující instituce) programu
+ 
+
+Účast studentů VŠE na zahraničním BIP programu
+Na základě fakultního výběrového řízení se mohou studenti nebo zaměstnanci VŠE účastnit programu, který pořádá zahraniční instituce. Komunikaci s partnerskými univerzitami včetně nominace zajišťuje daná fakulta.
+
+délka fyzické aktivity v rámci krátkodobé kombinované mobility je 5–30 dní, délka virtuální aktivity není omezena (musí ale být realizována).
+mobilita je financována z přiděleného E+ rozpočtu VŠE a finanční podpora je vypočítána na základě předpokládané délky pobytu:
+1.- 14. den:  79,- EUR/den
+15. – 30. den: 56,- EUR/den
+k pobytovým nákladům jsou připočítávány také cestovní náklady dle vzdálenostních pásem.
+studenti s omezenými příležitostmi mají nárok i na další finanční podporu.
+Finanční podpora slouží pouze k částečnému pokrytí nákladů, jedná se pouze o příspěvek na zvýšené náklady spojené s pobytem v zahraničí – předpokládá se finanční spoluúčast studenta. Období online mobility není ze strany programu Erasmus+ finančně podpořeno. Finanční podpora je přiznána pouze za období fyzické mobility.
+
+ 
+
+Organizace BIP na VŠE
+Jednotlivé programy jsou navrhovány a koordinovány na fakultní úrovni. Na základě navrženého programu jsou pak fakultě přiděleny finanční prostředky z programu Erasmus+.
+
+Podmínky:
+
+partnery jsou minimálně 3 vysokoškolské instituce (držitelé ECHE) ze 3 různých Erasmus+ programových zemí (země EU, Island, Lichtenštejnsko, Norsko, Severní Makedonie, Srbsko a Turecko)
+15 povinných účastníků z participujících institucí
+účastníky mohou být studenti nebo zaměstnanci
+programu se mohou účastnit i domácí studenti/zaměstnanci, kteří se však nepočítají mezi povinné účastníky (počet není určen)
+program se skládá z fyzické mobility v trvání 5-30 dní a virtuální mobility, kde délka není dána
+každému BIPu je nutno přidělit minimálně 3 ECTS
+opora v platné inter-institucionální smlouvě (vzor smlouvy ke stažení níže)
+ 
+
+Financování BIP
+Koordinující instituce
+Organizátorovi vybraného projektu BIP jsou přiděleny prostředky ve výši max. 6 000 EUR dle počtu povinných účastníků – 15 studentů programu (400€ na jednoho účastníka). Prostředky jsou určeny na přípravu, koordinaci, realizaci a „follow-up“ BIP, a to zejména na:
+
+přípravu výukových materiálů
+pronájem prostor a zařízení
+komunikační aktivity, překlady a tlumočení
+přípravné návštěvy a administrativní úkony
+občerstvení (coffee-breaks) během programu
+výlety a exkurze, které jsou součástí programu
+odměny vyučujícím, příp. administrativním pracovníkům
+ 
+
+Procesní postup
+
+
+Základem organizaci BIP je kontaktování partnerských zahraničních institucí a vytvoření programu doplňujícího stávající kurzy na zapojených univerzitách, zahrnující inovativní způsoby výuky a spolupráci online.
+
+1. Návrh projektu –  Organizátor BIP programu vyplní formulář návrhu projektu (ke stažení níže).
+
+2. Schválení projektu – Vyplněný formulář návrhu projektu předá na Oddělení zahraničních styků (OZS), které jej postoupí prorektorce pro mezinárodní vztahy ke schválení.
+
+3. Podpis multilaterální smlouvy – Pro organizaci programu je třeba podepsat s partnerskými institucemi multilaterální smlouvu. Vzor smlouvy je ke stažení níže. Smlouvu je třeba vyplnit, nechat podepsat (ideálně digitálním elektronickým podpisem) na partnerských školách a předat následně OZS, které zajistí podpis za VŠE. OZS následně zaregistruje BIP program v databázi Evropské komise Beneficiary Module.
+
+4. Přidělení finančních prostředků – informace k přidělení finančních prostředků jsou na stránkách zde.
+
+5. Administrativní proces – Zahraniční účastníci BIP programu jsou vybíraní na partnerských univerzitách. Tyto univerzity také zaregistrují své studenty do databáze Beneficiary Module a do konkrétního BIP programu na VŠE. Před zahájením programu je nutné studenty registrovat i ve studijním systému InSIS. Studijní smlouvy (Learning Agreement) zahraničních studentů odsouhlasuje proděkan pro studium a/nebo proděkan pro zahraniční styky příslušné fakulty.
+
+6. Příprava a realizace projektu –  informace k přípravě a realizaci projektu jsou na stránkách zde.
+
+7. Evaluace a vyúčtování projektu – informace k evaluaci a vyúčtování projektu jsou na stránkách zde.
+
+ 
+
+Kontakt
+Kontaktní osobou na OZS VŠE pro krátkodobé intenzivní programy (BIP) je Ing. Jana Snížková, jana.snizkova [at] vse.cz.
+
 
