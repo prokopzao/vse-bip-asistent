@@ -185,16 +185,26 @@ try:
         with st.chat_message("user"):
             st.markdown(prompt)
         
+        # Generování odpovědi
         with st.chat_message("assistant"):
             kontext = nacti_znalosti()
-            full_prompt = f"Jsi BIP asistent FM VŠE. Odpovídej stručně a v dark-cyber stylu. Znalosti: {kontext}\n\nOtázka: {prompt}"
+            
+            # TOTO JE TA ČÁST V KÓDU, KTEROU ZMĚŇ:
+            full_prompt = f"""
+            Jsi přátelský a srozumitelný asistent pro studenty FM VŠE. 
+            Tvým úkolem je radit ohledně programu BIP. 
+            Mluv lidsky, stručně a jasně. 
+            
+            Znalosti pro tvou odpověď: {kontext}
+            
+            Otázka studenta: {prompt}
+            """
             
             response = model.generate_content(full_prompt)
             st.markdown(response.text)
-            st.session_state.messages.append({"role": "assistant", "content": response.text})
-
 except Exception as e:
-    st.error(f"AI se právě restartuje. (Chyba: {e})")
+    st.error(f"AI se právě restartuje. Jestli asistent nebude fungovat do 20 minut, zavolej mi na cislo 739 936 816 - Prokop (Chyba: {e})")
+
 
 
 
