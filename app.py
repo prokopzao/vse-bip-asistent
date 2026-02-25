@@ -208,7 +208,8 @@ except Exception as e:
 st.write("Pomohla ti tato odpověď?")
 feedback = st.feedback("thumbs")
 if feedback is not None:
-    st.toast("Děkujeme za zpětnou vazbu! Studijní oddělení ji uvidí ve statistikách.")
+    st.toast("Děkujeme za zpětnou vazbu!")
+
 
 
 
