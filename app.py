@@ -204,6 +204,11 @@ try:
             st.markdown(response.text)
 except Exception as e:
     st.error(f"AI se právě restartuje. Jestli asistent nebude fungovat do 20 minut, zavolej mi na cislo 739 936 816 - Prokop (Chyba: {e})")
+# Streamlit má na to teď úplně novou, nativní funkci
+st.write("Pomohla ti tato odpověď?")
+feedback = st.feedback("thumbs")
+if feedback is not None:
+    st.toast("Děkujeme za zpětnou vazbu! Studijní oddělení ji uvidí ve statistikách.")
 
 
 
