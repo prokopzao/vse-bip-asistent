@@ -172,7 +172,7 @@ try:
     genai.configure(api_key=KLIC)
     
     # Model 2.5 Flash, který ti už prokazatelně fungoval
-    model = genai.GenerativeModel('models/gemini-flash-latest')
+    model = genai.GenerativeModel('gemini-2.5-flash')
 
     # Zobrazení historie zpráv
     for message in st.session_state.messages:
@@ -204,6 +204,7 @@ try:
             st.markdown(response.text)
 except Exception as e:
     st.error(f"AI se právě restartuje. Jestli asistent nebude fungovat do 20 minut, zavolej mi na cislo 739 936 816 - Prokop (Chyba: {e})")
+
 
 
 
