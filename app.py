@@ -161,7 +161,6 @@ for i, (title, desc) in enumerate(dokumenty):
 st.write("")
 if st.button("✨ MÁM VŠECHNO HOTOVO!"):
     st.balloons()
-    st.snow()
     st.success("Geniální práce! Užij si svůj BIP výjezd! 🌍")
 
 st.write("---")
@@ -205,6 +204,7 @@ try:
             st.markdown(response.text)
 except Exception as e:
     st.error(f"AI se právě restartuje. Jestli asistent nebude fungovat do 20 minut, zavolej mi na cislo 739 936 816 - Prokop (Chyba: {e})")
+
 
 
 
