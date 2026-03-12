@@ -279,4 +279,24 @@ Základem organizaci BIP je kontaktování partnerských zahraničních instituc
 Kontakt
 Kontaktní osobou na OZS VŠE pro krátkodobé intenzivní programy (BIP) je Ing. Jana Snížková, jana.snizkova [at] vse.cz.
 
+INFORMACE PO VÝJEZDU: 1/ Potvrzení o délce studia (Confirmation of study period)
+Jedná se o dokument dokládající skutečnou délku pobytu. Pokud Vám hostitelská škola nevystaví jiný (délka pobytu může být potvrzena i na certifikátu o absolvování programu), nechte si na partnerské škole potvrdit náš formulář.
+Následně prosím o naskenování dokumentu a nahrání do příslušného pole v checklistu v InSIS.
+Originál dokumentu prosím poté doručte (osobně/poštou/přes podatelnu školy) na OZS.
+2/ Vyplnění zpráv z pobytu
+
+Zprávu v InSIS – formulář najdete zde: Portál studenta -> Moje výjezdy do zahraničí -> Hodnocení zahraničního pobytu. 
+Zprávu z pobytu v Beneficiary Module vyplňte na odkazu, který obdržíte emailem cca v den ukončení mobility.  Automaticky vygenerovaný email s odkazem k vyplnění Erasmus+ Participant Survey přijde na vaši školní emailovou adresu
+ 
+3/ Transcript of Records (ToR)
+ 
+Hostitelské školy vydávání obvykle Transcript/Certifikát o absolvování BIP kurzu na konci pobytu.
+Kopii Transcriptu/certifikátu nahrajte do Checklistu (Portál studenta –> Moje výjezdy do zahraničí –> Checklist).
+4/ Uznání předmětů
+
+O uznání předmětů budete žádat online v InSIS, v sekci "Moje výjezdy do zahraničí". 
+Žádost o uznání bude v InSIS otevřena až poté, co do checklistu v InSIS nahrajete a na OZS dodáte Confirmation of study period a Transcript of Records/Certifikát a poté, co budou tyto položky v checklistu potvrzeny.
+Důkladně si pročtěte postup uznávání, včetně návodu s printscreeny (dole na stránce) na webu OZS. 
+
+
 
