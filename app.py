@@ -172,7 +172,7 @@ try:
     genai.configure(api_key=KLIC)
     
     # Model 2.5 Flash, který ti už prokazatelně fungoval
-    model = genai.GenerativeModel('gemini-2.5-flash')
+    model = genai.GenerativeMode)
 
     # Zobrazení historie zpráv
     for message in st.session_state.messages:
